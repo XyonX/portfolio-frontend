@@ -38,60 +38,43 @@ export default function Home() {
   return (
     <div className="bg-white">
       {/* Hero Section */}
-
-      <section className="relative bg-gradient-to-br from-blue-50 to-indigo-50">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-24 md:py-32">
-          <div className="text-center md:text-left">
-            <div className="max-w-3xl mx-auto md:mx-0 md:max-w-2xl lg:max-w-4xl">
-              <div className="mb-8 inline-block rounded-full p-1 bg-gradient-to-r from-black to-gray-800 animate-gradient-x">
-                <div className="relative h-24 w-24 rounded-full border-4 border-white overflow-hidden">
-                  <Image
-                    src="https://avatars.githubusercontent.com/u/33289572?v=4"
-                    alt="Jace's profile"
-                    fill
-                    className="object-cover"
-                    priority
-                  />
-                </div>
-              </div>
-
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 animate-fade-in-up">
-                Hi, I'm Joy
-                <span className="block mt-3 text-2xl sm:text-3xl text-gray-600 font-medium">
-                  Full-Stack Developer
-                </span>
-              </h1>
-
-              <p className="text-lg sm:text-xl text-gray-600 mb-8 max-w-xl mx-auto md:mx-0 leading-relaxed">
-                Building beautiful, performant web experiences with modern
-                technologies.
-              </p>
-
-              <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4">
-                <Link
-                  href="/about-me"
-                  className="w-full sm:w-auto px-8 py-3.5 text-base font-semibold text-white bg-gray-900 rounded-lg hover:bg-gray-800 transition-all duration-300 transform hover:scale-[1.02] shadow-sm hover:shadow-md"
-                >
-                  About Me
-                </Link>
-                <Link
-                  href="/portfolios"
-                  className="w-full sm:w-auto px-8 py-3.5 text-base font-semibold text-gray-900 bg-transparent rounded-lg border-2 border-gray-300 hover:border-gray-400 transition-all duration-300 transform hover:scale-[1.02]"
-                >
-                  View Projects
-                </Link>
-              </div>
-
-              {/* Social Links (optional) */}
-              <div className="mt-8 flex justify-center md:justify-start space-x-4">
-                {/* Add your social media icons/links here */}
-              </div>
+      <section className="relative py-24 bg-gradient-to-br from-blue-50 to-indigo-50">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <div className="mb-8 inline-block rounded-full bg-white/50 p-3 shadow-sm backdrop-blur-sm">
+              <span className="text-4xl animate-waving-hand">👋</span>
+            </div>
+            <h1 className="text-5xl font-bold text-gray-900 sm:text-6xl md:text-7xl">
+              Transforming Ideas Into
+              <span className="block bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                Digital Reality
+              </span>
+            </h1>
+            <p className="mx-auto mt-6 max-w-2xl text-xl text-gray-600">
+              Full-stack developer specializing in modern web applications.
+              Passionate about creating performant, accessible, and visually
+              stunning digital experiences.
+            </p>
+            <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+              <Link
+                href="/about-me"
+                className="transform rounded-lg bg-gradient-to-r from-indigo-600 to-purple-600 px-8 py-4 text-lg font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:from-indigo-700 hover:to-purple-700 hover:shadow-xl"
+              >
+                Explore My Work
+              </Link>
+              <Link
+                href="/contact"
+                className="rounded-lg px-8 py-4 text-lg font-semibold text-gray-900 ring-1 ring-gray-900/10 transition-all duration-300 hover:bg-gray-900/5 hover:ring-gray-900/20"
+              >
+                Let's Connect
+              </Link>
             </div>
           </div>
         </div>
 
-        {/* Optional decorative elements */}
-        <div className="absolute inset-0 -z-10 opacity-10 pattern-dots pattern-gray-400 pattern-size-4" />
+        {/* Decorative elements */}
+        <div className="absolute top-0 left-0 h-24 w-24 rounded-full bg-purple-100/40 blur-3xl" />
+        <div className="absolute bottom-0 right-0 h-24 w-24 rounded-full bg-indigo-100/40 blur-3xl" />
       </section>
 
       {/* Featured Projects Section */}
