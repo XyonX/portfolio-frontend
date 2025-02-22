@@ -143,22 +143,20 @@ export default function Home() {
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {[
+              "Unreal Engine",
               "JavaScript",
               "React",
               "Node.js",
               "Next.js",
               "Tailwind CSS",
-              "MongoDB",
               "Express",
               "Git",
             ].map((skill, index) => (
               <div
                 key={index}
-                className="bg-white shadow-sm rounded-lg p-4 text-center"
+                className=" bg-black shadow-sm rounded-lg p-4 text-center"
               >
-                <span className="text-lg font-medium text-gray-900">
-                  {skill}
-                </span>
+                <span className="text-lg font-medium text-white">{skill}</span>
               </div>
             ))}
           </div>

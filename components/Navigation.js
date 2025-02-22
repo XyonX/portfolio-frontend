@@ -73,24 +73,36 @@ const Navigation = () => {
             <Link
               href="/"
               className="text-gray-600 block px-3 py-2 text-base font-medium hover:bg-gray-50"
+              onClick={() => {
+                setShowMobileMenu(!showMobileMenu);
+              }}
             >
               Home
             </Link>
             <Link
               href="/blogs"
               className="text-gray-600 block px-3 py-2 text-base font-medium hover:bg-gray-50"
+              onClick={() => {
+                setShowMobileMenu(!showMobileMenu);
+              }}
             >
               Blogs
             </Link>
             <Link
               href="/portfolios"
               className="text-gray-600 block px-3 py-2 text-base font-medium hover:bg-gray-50"
+              onClick={() => {
+                setShowMobileMenu(!showMobileMenu);
+              }}
             >
               Portfolios
             </Link>
             <Link
               href="/about"
               className="text-gray-600 block px-3 py-2 text-base font-medium hover:bg-gray-50"
+              onClick={() => {
+                setShowMobileMenu(!showMobileMenu);
+              }}
             >
               About Me
             </Link>
