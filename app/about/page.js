@@ -110,6 +110,7 @@ export default function About() {
               "Node.js",
               "Next.js",
               "Tailwind CSS",
+
               "C#",
               "Blender",
             ].map((tech, index) => (

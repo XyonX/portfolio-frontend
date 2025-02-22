@@ -13,7 +13,10 @@ const Navigation = () => {
         <div className="flex h-16 items-center justify-between">
           {/* Logo/Brand */}
           <div className="flex-shrink-0">
-            <span className="text-xl font-bold text-gray-900">JACE</span>
+            <span className="text-xl font-bold text-gray-900 mr-2">JACE</span>
+            <span className="hidden lg:inline-block text-xl  text-gray-900">
+              (JOYDIP CHAKRABORTY)
+            </span>
           </div>
 
           {/* Desktop Navigation */}

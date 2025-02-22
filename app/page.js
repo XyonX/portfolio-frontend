@@ -39,61 +39,137 @@ export default function Home() {
     <div className="bg-white">
       {/* Hero Section */}
 
-      <section className="relative bg-gradient-to-br from-blue-50 to-indigo-50">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-24 md:py-32">
-          <div className="text-center md:text-left">
-            <div className="max-w-3xl mx-auto md:mx-0 md:max-w-2xl lg:max-w-4xl">
-              <div className="mb-8 inline-block rounded-full p-1 bg-gradient-to-r from-black to-gray-800 animate-gradient-x">
-                <div className="relative h-24 w-24 rounded-full border-4 border-white overflow-hidden">
-                  <Image
-                    src="https://avatars.githubusercontent.com/u/33289572?v=4"
-                    alt="Jace's profile"
-                    fill
-                    className="object-cover"
-                    priority
-                  />
+      <section className="relative bg-gradient-to-br from-blue-50 via-indigo-50 to-white overflow-hidden">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-16 pb-24 md:pt-24">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Left Content (Unchanged) */}
+            <div className="text-center lg:text-left animate-fade-in">
+              <div className="inline-flex items-center mb-6">
+                <span className="relative flex h-3 w-3 mr-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                </span>
+                <span className="text-sm font-medium text-gray-600">
+                  Available for projects
+                </span>
+              </div>
+
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-4">
+                Crafting Digital
+                <span className="block text-indigo-600">Excellence</span>
+              </h1>
+
+              <p className="text-lg sm:text-xl text-gray-600 mb-8 max-w-md mx-auto lg:mx-0">
+                Hi, I'm Joy - a Full-Stack Developer passionate about creating
+                innovative web solutions that drive impact.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                <Link
+                  href="/portfolios"
+                  className="px-8 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition-all duration-300 shadow-md hover:shadow-lg"
+                >
+                  Explore My Work
+                </Link>
+                <Link
+                  href="/contact"
+                  className="px-8 py-3 bg-transparent text-indigo-600 font-semibold rounded-lg border-2 border-indigo-600 hover:bg-indigo-50 transition-all duration-300"
+                >
+                  Get in Touch
+                </Link>
+              </div>
+            </div>
+
+            {/* Updated Right Visual - Aligned to Right */}
+            <div className="relative hidden lg:block">
+              <div className="relative w-full flex justify-end">
+                <div className="relative w-80 h-80">
+                  {" "}
+                  {/* Reduced size to fit better */}
+                  {/* Background Circle */}
+                  <div className="absolute inset-0 bg-indigo-100 rounded-full opacity-20 animate-pulse-slow"></div>
+                  {/* Tech Icons (Extending Beyond Boundaries) */}
+                  <div className="absolute -inset-12 animate-spin-slow">
+                    <div className="absolute w-16 h-16 top-0 left-1/2 -translate-x-1/2 -translate-y-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition-transform duration-300">
+                      <Image
+                        src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/react.svg"
+                        alt="React"
+                        width={32}
+                        height={32}
+                        className="text-indigo-600"
+                      />
+                    </div>
+                  </div>
+                  <div
+                    className="absolute -inset-12 animate-spin-slow"
+                    style={{ animationDirection: "reverse" }}
+                  >
+                    <div className="absolute w-16 h-16 bottom-0 left-1/2 -translate-x-1/2 translate-y-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition-transform duration-300">
+                      <Image
+                        src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/nextdotjs.svg"
+                        alt="Next.js"
+                        width={32}
+                        height={32}
+                        className="text-black"
+                      />
+                    </div>
+                  </div>
+                  {/* Additional Tech Icon Example */}
+                  <div
+                    className="absolute -inset-12 animate-spin-slow"
+                    style={{ animationDelay: "-5s" }}
+                  >
+                    <div className="absolute w-16 h-16 right-0 top-1/2 translate-x-12 -translate-y-1/2 bg-white rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition-transform duration-300">
+                      <Image
+                        src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/tailwindcss.svg"
+                        alt="Tailwind CSS"
+                        width={32}
+                        height={32}
+                        className="text-blue-500"
+                      />
+                    </div>
+                  </div>
+                  <div
+                    className="absolute -inset-12 animate-spin-slow"
+                    style={{ animationDelay: "-5s" }}
+                  >
+                    <div className="absolute w-16 h-16 right-0 top-1/2 translate-x-12 -translate-y-1/2 bg-white rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition-transform duration-300">
+                      <Image
+                        src="https://cdn.jsdelivr.net/npm/simple-icons@9.21.0/icons/unrealengine.svg"
+                        alt="Tailwind CSS"
+                        width={32}
+                        height={32}
+                        className="text-blue-500"
+                      />
+                    </div>
+                  </div>
+                  {/* Center Profile Image - Aligned Right */}
+                  <div className="absolute inset-4 bg-white rounded-full shadow-xl overflow-hidden border-4 border-indigo-200">
+                    <Image
+                      src="https://avatars.githubusercontent.com/u/33289572?v=4"
+                      alt="Joy's profile"
+                      fill
+                      className="object-cover"
+                      priority
+                    />
+                  </div>
                 </div>
               </div>
 
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 animate-fade-in-up">
-                Hi, I'm Joy
-                <span className="block mt-3 text-2xl sm:text-3xl text-gray-600 font-medium">
-                  Full-Stack Developer
+              {/* Floating Text - Adjusted Position */}
+              <div className="absolute bottom-0 right-0 translate-y-12 text-center">
+                <span className="inline-block px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-full shadow-md">
+                  Core Technologies
                 </span>
-              </h1>
-
-              <p className="text-lg sm:text-xl text-gray-600 mb-8 max-w-xl mx-auto md:mx-0 leading-relaxed">
-                Building beautiful, performant web experiences with modern
-                technologies.
-              </p>
-
-              <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4">
-                <Link
-                  href="/about"
-                  className="w-full sm:w-auto px-8 py-3.5 text-base font-semibold text-white bg-gray-900 rounded-lg hover:bg-gray-800 transition-all duration-300 transform hover:scale-[1.02] shadow-sm hover:shadow-md"
-                >
-                  About Me
-                </Link>
-                <Link
-                  href="/portfolios"
-                  className="w-full sm:w-auto px-8 py-3.5 text-base font-semibold text-gray-900 bg-transparent rounded-lg border-2 border-gray-300 hover:border-gray-400 transition-all duration-300 transform hover:scale-[1.02]"
-                >
-                  View Projects
-                </Link>
-              </div>
-
-              {/* Social Links (optional) */}
-              <div className="mt-8 flex justify-center md:justify-start space-x-4">
-                {/* Add your social media icons/links here */}
               </div>
             </div>
           </div>
         </div>
 
-        {/* Optional decorative elements */}
-        <div className="absolute inset-0 -z-10 opacity-10 pattern-dots pattern-gray-400 pattern-size-4" />
+        {/* Decorative Elements */}
+        <div className="absolute top-0 right-0 w-72 h-72 bg-indigo-100 rounded-full -z-10 opacity-50 transform translate-x-1/3 -translate-y-1/3 blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-100 rounded-full -z-10 opacity-50 transform -translate-x-1/4 translate-y-1/4 blur-2xl" />
       </section>
-
       {/* Featured Projects Section */}
       <section className="py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
