@@ -241,6 +241,67 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Articles
+      <section className="py-16 bg-primary-bg">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-primary-text text-center mb-12">
+            Recent Articles
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                title: "Mastering Next.js: Tips for Scalable Apps",
+                excerpt:
+                  "Learn how to structure your Next.js projects for performance and scalability.",
+                date: "Feb 10, 2025",
+                link: "/blog/nextjs-tips",
+              },
+              {
+                title: "GraphQL vs REST: A Developer’s Perspective",
+                excerpt:
+                  "Breaking down the pros and cons of GraphQL and REST APIs in real-world scenarios.",
+                date: "Jan 25, 2025",
+                link: "/blog/graphql-vs-rest",
+              },
+              {
+                title: "Building Responsive UI with Tailwind CSS",
+                excerpt:
+                  "A guide to creating beautiful, responsive designs with Tailwind CSS.",
+                date: "Jan 15, 2025",
+                link: "/blog/tailwind-responsive",
+              },
+            ].map((article, index) => (
+              <div
+                key={index}
+                className="bg-secondary-bg rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 p-6"
+              >
+                <h3 className="text-xl font-semibold text-primary-text mb-2">
+                  {article.title}
+                </h3>
+                <p className="text-sm text-secondary-text mb-4">
+                  {article.date}
+                </p>
+                <p className="text-secondary-text mb-4">{article.excerpt}</p>
+                <Link
+                  href={article.link}
+                  className="text-sm font-medium text-accent-text hover:text-primary-btn-hover transition-colors duration-200"
+                >
+                  Read More →
+                </Link>
+              </div>
+            ))}
+          </div>
+          <div className="mt-12 text-center">
+            <Link
+              href="/blog"
+              className="inline-block px-6 py-3 text-base font-medium text-light-text bg-dark-btn rounded-md hover:bg-dark-btn-hover transition-colors duration-200"
+            >
+              View All Articles
+            </Link>
+          </div>
+        </div>
+      </section> */}
+
       {/* Contact Section */}
       <section className="py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
