@@ -45,7 +45,7 @@ const Navigation = () => {
               </li>
               <li>
                 <Link
-                  href="/about-me"
+                  href="/about"
                   className="text-gray-600 hover:text-black transition-colors duration-200 text-sm font-medium border-b-2 border-transparent hover:border-black"
                 >
                   About Me

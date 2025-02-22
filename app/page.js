@@ -69,7 +69,7 @@ export default function Home() {
 
               <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4">
                 <Link
-                  href="/about-me"
+                  href="/about"
                   className="w-full sm:w-auto px-8 py-3.5 text-base font-semibold text-white bg-gray-900 rounded-lg hover:bg-gray-800 transition-all duration-300 transform hover:scale-[1.02] shadow-sm hover:shadow-md"
                 >
                   About Me

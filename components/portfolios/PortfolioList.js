@@ -29,7 +29,6 @@ const PortfolioList = async () => {
           <Post key={item.id} post={item} />
         ))}
       </div>
-      hi
     </div>
   );
 };
