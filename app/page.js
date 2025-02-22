@@ -36,30 +36,30 @@ export default function Home() {
   ];
 
   return (
-    <div className="bg-white">
+    <div className="bg-primary-bg">
       {/* Hero Section */}
 
-      <section className="relative bg-gradient-to-br from-blue-50 via-indigo-50 to-white overflow-hidden">
+      <section className="relative bg-gradient-to-br from-gradient-start via-gradient-mid to-gradient-end overflow-hidden">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-16 pb-24 md:pt-24">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Left Content (Unchanged) */}
             <div className="text-center lg:text-left animate-fade-in">
               <div className="inline-flex items-center mb-6">
                 <span className="relative flex h-3 w-3 mr-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-status-light opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-3 w-3 bg-status-dark"></span>
                 </span>
-                <span className="text-sm font-medium text-gray-600">
+                <span className="text-sm font-medium text-secondary-text">
                   Available for projects
                 </span>
               </div>
 
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-4">
                 Crafting Digital
-                <span className="block text-indigo-600">Excellence</span>
+                <span className="block text-accent-text">Excellence</span>
               </h1>
 
-              <p className="text-lg sm:text-xl text-gray-600 mb-8 max-w-md mx-auto lg:mx-0">
+              <p className="text-lg sm:text-xl text-secondary-text mb-8 max-w-md mx-auto lg:mx-0">
                 Hi, I'm Joy - a Full-Stack Developer passionate about creating
                 innovative web solutions that drive impact.
               </p>
@@ -67,13 +67,13 @@ export default function Home() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                 <Link
                   href="/portfolios"
-                  className="px-8 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition-all duration-300 shadow-md hover:shadow-lg"
+                  className="px-8 py-3 bg-primary-btn text-light-text font-semibold rounded-lg hover:bg-primary-btn-hover transition-all duration-300 shadow-md hover:shadow-lg"
                 >
                   Explore My Work
                 </Link>
                 <Link
                   href="/contact"
-                  className="px-8 py-3 bg-transparent text-indigo-600 font-semibold rounded-lg border-2 border-indigo-600 hover:bg-indigo-50 transition-all duration-300"
+                  className="px-8 py-3 bg-transparent text-accent-text font-semibold rounded-lg border-2 border-accent-border hover:bg-secondary-btn-hover transition-all duration-300"
                 >
                   Get in Touch
                 </Link>
@@ -84,19 +84,18 @@ export default function Home() {
             <div className="relative hidden lg:block">
               <div className="relative w-full flex justify-end">
                 <div className="relative w-80 h-80">
-                  {" "}
                   {/* Reduced size to fit better */}
                   {/* Background Circle */}
-                  <div className="absolute inset-0 bg-indigo-100 rounded-full opacity-20 animate-pulse-slow"></div>
+                  <div className="absolute inset-0 bg-decor-light rounded-full opacity-20 animate-pulse-slow"></div>
                   {/* Tech Icons (Extending Beyond Boundaries) */}
                   <div className="absolute -inset-12 animate-spin-slow">
-                    <div className="absolute w-16 h-16 top-0 left-1/2 -translate-x-1/2 -translate-y-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition-transform duration-300">
+                    <div className="absolute w-16 h-16 top-0 left-1/2 -translate-x-1/2 -translate-y-12 bg-primary-bg rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition-transform duration-300">
                       <Image
                         src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/react.svg"
                         alt="React"
                         width={32}
                         height={32}
-                        className="text-indigo-600"
+                        className="text-tech-accent"
                       />
                     </div>
                   </div>
@@ -104,13 +103,13 @@ export default function Home() {
                     className="absolute -inset-12 animate-spin-slow"
                     style={{ animationDirection: "reverse" }}
                   >
-                    <div className="absolute w-16 h-16 bottom-0 left-1/2 -translate-x-1/2 translate-y-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition-transform duration-300">
+                    <div className="absolute w-16 h-16 bottom-0 left-1/2 -translate-x-1/2 translate-y-12 bg-primary-bg rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition-transform duration-300">
                       <Image
                         src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/nextdotjs.svg"
                         alt="Next.js"
                         width={32}
                         height={32}
-                        className="text-black"
+                        className="text-tech-dark"
                       />
                     </div>
                   </div>
@@ -119,13 +118,13 @@ export default function Home() {
                     className="absolute -inset-12 animate-spin-slow"
                     style={{ animationDelay: "-5s" }}
                   >
-                    <div className="absolute w-16 h-16 right-0 top-1/2 translate-x-12 -translate-y-1/2 bg-white rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition-transform duration-300">
+                    <div className="absolute w-16 h-16 right-0 top-1/2 translate-x-12 -translate-y-1/2 bg-primary-bg rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition-transform duration-300">
                       <Image
                         src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/tailwindcss.svg"
                         alt="Tailwind CSS"
                         width={32}
                         height={32}
-                        className="text-blue-500"
+                        className="text-tech-blue"
                       />
                     </div>
                   </div>
@@ -133,18 +132,18 @@ export default function Home() {
                     className="absolute -inset-12 animate-spin-slow"
                     style={{ animationDelay: "-5s" }}
                   >
-                    <div className="absolute w-16 h-16 right-0 top-1/2 translate-x-12 -translate-y-1/2 bg-white rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition-transform duration-300">
+                    <div className="absolute w-16 h-16 right-0 top-1/2 translate-x-12 -translate-y-1/2 bg-primary-bg rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition-transform duration-300">
                       <Image
-                        src="https://cdn.jsdelivr.net/npm/simple-icons@9.21.0/icons/unrealengine.svg"
+                        src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/unrealengine.svg"
                         alt="Tailwind CSS"
                         width={32}
                         height={32}
-                        className="text-blue-500"
+                        className="text-tech-dark"
                       />
                     </div>
                   </div>
                   {/* Center Profile Image - Aligned Right */}
-                  <div className="absolute inset-4 bg-white rounded-full shadow-xl overflow-hidden border-4 border-indigo-200">
+                  <div className="absolute inset-4 bg-white rounded-full shadow-xl overflow-hidden border-4 border-light-border">
                     <Image
                       src="https://avatars.githubusercontent.com/u/33289572?v=4"
                       alt="Joy's profile"
@@ -158,29 +157,28 @@ export default function Home() {
 
               {/* Floating Text - Adjusted Position */}
               <div className="absolute bottom-0 right-0 translate-y-12 text-center">
-                <span className="inline-block px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-full shadow-md">
+                <span className="inline-block px-4 py-2 bg-primary-btn text-light-text text-sm font-medium rounded-full shadow-md">
                   Core Technologies
                 </span>
               </div>
             </div>
           </div>
         </div>
-
         {/* Decorative Elements */}
-        <div className="absolute top-0 right-0 w-72 h-72 bg-indigo-100 rounded-full -z-10 opacity-50 transform translate-x-1/3 -translate-y-1/3 blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-100 rounded-full -z-10 opacity-50 transform -translate-x-1/4 translate-y-1/4 blur-2xl" />
+        <div className="absolute top-0 right-0 w-72 h-72 bg-decor-light rounded-full -z-10 opacity-50 transform translate-x-1/3 -translate-y-1/3 blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-64 h-64 bg-decor-blue rounded-full -z-10 opacity-50 transform -translate-x-1/4 translate-y-1/4 blur-2xl" />
       </section>
       {/* Featured Projects Section */}
       <section className="py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-gray-900 text-center mb-8">
+          <h2 className="text-3xl font-bold text-primary-text text-center mb-8">
             Featured Projects
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects.map((project, index) => (
               <div
                 key={index}
-                className="bg-white shadow-sm rounded-lg overflow-hidden"
+                className="bg-primary-bg shadow-sm rounded-lg overflow-hidden hover:shadow-md transition-shadow duration-300"
               >
                 <div className="relative w-full h-48">
                   <Image
@@ -192,14 +190,16 @@ export default function Home() {
                   />
                 </div>
                 <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900">
+                  <h3 className="text-xl font-bold text-primary-text">
                     {project.title}
                   </h3>
-                  <p className="mt-2 text-gray-600">{project.description}</p>
+                  <p className="mt-2 text-secondary-text">
+                    {project.description}
+                  </p>
                   <div className="mt-4">
                     <Link
                       href={project.link}
-                      className="text-sm font-medium text-black hover:text-gray-800 transition-colors duration-200"
+                      className="text-sm font-medium text-accent-text hover:text-primary-btn-hover transition-colors duration-200"
                     >
                       View Project →
                     </Link>
@@ -212,7 +212,7 @@ export default function Home() {
       </section>
 
       {/* Skills Section */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-secondary-bg">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-gray-900 text-center mb-8">
             My Skills
@@ -232,7 +232,9 @@ export default function Home() {
                 key={index}
                 className=" bg-black shadow-sm rounded-lg p-4 text-center"
               >
-                <span className="text-lg font-medium text-white">{skill}</span>
+                <span className="text-lg font-medium text-light-text">
+                  {skill}
+                </span>
               </div>
             ))}
           </div>
@@ -245,14 +247,14 @@ export default function Home() {
           <h2 className="text-3xl font-bold text-gray-900">
             Let's Work Together!
           </h2>
-          <p className="mt-4 text-lg text-gray-600">
+          <p className="mt-4 text-lg text-secondary-text">
             Have a project in mind? Reach out to me via email or connect on
             social media.
           </p>
           <div className="mt-8">
             <Link
               href="/contact"
-              className="inline-block px-6 py-3 text-base font-medium text-white bg-black rounded-md hover:bg-gray-800 transition-colors duration-200"
+              className="inline-block px-6 py-3 text-base font-medium text-light-text bg-dark-btn rounded-md hover:bg-dark-btn-hover transition-colors duration-200"
             >
               Contact Me
             </Link>
