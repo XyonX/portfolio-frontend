@@ -220,7 +220,7 @@ export default function Home() {
             Technical Expertise
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12 relative z-10">
+          <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-8 lg:gap-12 relative z-10">
             {/* Game Development Column */}
             <div className="animate-fade-in-up">
               <div className="flex flex-col items-center text-center">
@@ -238,36 +238,33 @@ export default function Home() {
                   Game Development
                 </h3>
                 <div className="space-y-3">
-                  {[
-                    "unrealengine",
-                    "blender",
-                    "cplusplus",
-                    "threedotjs",
-                    "opengl",
-                    "unity",
-                  ].map((icon, i) => (
-                    <div
-                      key={i}
-                      className="flex items-center justify-center space-x-2 group"
-                    >
-                      <span className="w-5 h-5 flex-shrink-0 text-tech-accent">
-                        <Image
-                          src={`https://cdn.jsdelivr.net/npm/simple-icons@9.21.0/icons/${icon}.svg`}
-                          alt={icon}
-                          width={20}
-                          height={20}
-                          onError={(e) => (e.target.src = "/fallback-icon.svg")}
-                        />
-                      </span>
-                      <span className="text-secondary-text group-hover:text-accent-text transition-colors duration-200">
-                        {icon
-                          .replace(/([a-z])([A-Z])/g, "$1 $2")
-                          .replace("plusplus", "++")
-                          .replace("threedotjs", "Three.js")
-                          .replace("unrealengine", "Unreal Engine")}
-                      </span>
-                    </div>
-                  ))}
+                  {["unrealengine", "blender", "cplusplus", "threedotjs"].map(
+                    (icon, i) => (
+                      <div
+                        key={i}
+                        className="flex items-center justify-center space-x-2 group"
+                      >
+                        <span className="w-5 h-5 flex-shrink-0 text-tech-accent">
+                          <Image
+                            src={`https://cdn.jsdelivr.net/npm/simple-icons@9.21.0/icons/${icon}.svg`}
+                            alt={icon}
+                            width={20}
+                            height={20}
+                            onError={(e) =>
+                              (e.target.src = "/fallback-icon.svg")
+                            }
+                          />
+                        </span>
+                        <span className="text-secondary-text group-hover:text-accent-text transition-colors duration-200">
+                          {icon
+                            .replace(/([a-z])([A-Z])/g, "$1 $2")
+                            .replace("plusplus", "++")
+                            .replace("threedotjs", "Three.js")
+                            .replace("unrealengine", "Unreal Engine")}
+                        </span>
+                      </div>
+                    )
+                  )}
                 </div>
               </div>
             </div>
@@ -294,7 +291,6 @@ export default function Home() {
                     "nextdotjs",
                     "tailwindcss",
                     "express",
-                    "typescript",
                     "node.js",
                   ].map((icon, i) => (
                     <div
@@ -322,7 +318,53 @@ export default function Home() {
                 </div>
               </div>
             </div>
-
+            {/* Programming Languages Column */}
+            <div className="animate-fade-in-up delay-300">
+              <div className="flex flex-col items-center text-center">
+                <div className="mb-4 w-16 h-16 rounded-full bg-primary-bg/20 backdrop-blur-sm flex items-center justify-center border border-accent-border/30 hover:bg-primary-bg/40 transition-all duration-300">
+                  <Image
+                    src="https://cdn.jsdelivr.net/npm/simple-icons@9.21.0/icons/cplusplus.svg"
+                    alt="C++"
+                    width={32}
+                    height={32}
+                    className="text-accent-text"
+                    onError={(e) => (e.target.src = "/fallback-icon.svg")}
+                  />
+                </div>
+                <h3 className="text-xl font-semibold text-accent-text mb-4">
+                  Programming Languages
+                </h3>
+                <div className="space-y-3">
+                  {["cplusplus", "python", "javascript", "java"].map(
+                    (icon, i) => (
+                      <div
+                        key={i}
+                        className="flex items-center justify-center space-x-2 group"
+                      >
+                        <span className="w-5 h-5 flex-shrink-0">
+                          <Image
+                            src={`https://cdn.jsdelivr.net/npm/simple-icons@9.21.0/icons/${icon}.svg`}
+                            alt={icon}
+                            width={20}
+                            height={20}
+                            onError={(e) =>
+                              (e.target.src = "/fallback-icon.svg")
+                            }
+                          />
+                        </span>
+                        <span className="text-secondary-text group-hover:text-accent-text transition-colors duration-200">
+                          {icon === "cplusplus"
+                            ? "C++"
+                            : icon === "javascript"
+                            ? "JS"
+                            : icon.charAt(0).toUpperCase() + icon.slice(1)}
+                        </span>
+                      </div>
+                    )
+                  )}
+                </div>
+              </div>
+            </div>
             {/* Other Skills Column */}
             <div className="animate-fade-in-up delay-200">
               <div className="flex flex-col items-center text-center">
@@ -340,14 +382,7 @@ export default function Home() {
                   Other Skills
                 </h3>
                 <div className="space-y-3">
-                  {[
-                    "git",
-                    "linux",
-                    "docker",
-                    "jenkins",
-                    "amazonaws",
-                    "nginx",
-                  ].map((icon, i) => (
+                  {["git", "linux", "docker", "amazonaws"].map((icon, i) => (
                     <div
                       key={i}
                       className="flex items-center justify-center space-x-2 group"

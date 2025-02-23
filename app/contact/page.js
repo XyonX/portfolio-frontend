@@ -38,9 +38,9 @@ const ContactPage = () => {
                 <div>
                   <label
                     htmlFor="name"
-                    className="block text-sm font-medium text-secondary-text"
+                    className="block text-sm font-medium text-secondary-text "
                   >
-                    Your Name
+                    Name
                   </label>
                   <input
                     type="text"
