@@ -212,32 +212,171 @@ export default function Home() {
       </section>
 
       {/* Skills Section */}
-      <section className="py-16 bg-secondary-bg">
+      {/* Option 1: Diagonal Gradient Mesh
+      <section className="relative py-16 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-gradient-start/30 via-gradient-mid/20 to-gradient-end/30 overflow-hidden"> */}
+      <section className="relative py-16 bg-primary-bg overflow-hidden">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-gray-900 text-center mb-8">
-            My Skills
+          <h2 className="text-3xl font-bold text-primary-text text-center mb-12 animate-fade-in">
+            Technical Expertise
           </h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {[
-              "Unreal Engine",
-              "JavaScript",
-              "React",
-              "Node.js",
-              "Next.js",
-              "Tailwind CSS",
-              "Express",
-              "Git",
-            ].map((skill, index) => (
-              <div
-                key={index}
-                className=" bg-black shadow-sm rounded-lg p-4 text-center"
-              >
-                <span className="text-lg font-medium text-light-text">
-                  {skill}
-                </span>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12 relative z-10">
+            {/* Game Development Column */}
+            <div className="animate-fade-in-up">
+              <div className="flex flex-col items-center text-center">
+                <div className="mb-4 w-16 h-16 rounded-full bg-primary-bg/20 backdrop-blur-sm flex items-center justify-center border border-accent-border/30 hover:bg-primary-bg/40 transition-all duration-300">
+                  <Image
+                    src="https://cdn.jsdelivr.net/npm/simple-icons@9.21.0/icons/unrealengine.svg"
+                    alt="Unreal Engine"
+                    width={32}
+                    height={32}
+                    className="text-accent-text"
+                    onError={(e) => (e.target.src = "/fallback-icon.svg")}
+                  />
+                </div>
+                <h3 className="text-xl font-semibold text-accent-text mb-4">
+                  Game Development
+                </h3>
+                <div className="space-y-3">
+                  {[
+                    "unrealengine",
+                    "blender",
+                    "cplusplus",
+                    "threedotjs",
+                    "opengl",
+                    "unity",
+                  ].map((icon, i) => (
+                    <div
+                      key={i}
+                      className="flex items-center justify-center space-x-2 group"
+                    >
+                      <span className="w-5 h-5 flex-shrink-0 text-tech-accent">
+                        <Image
+                          src={`https://cdn.jsdelivr.net/npm/simple-icons@9.21.0/icons/${icon}.svg`}
+                          alt={icon}
+                          width={20}
+                          height={20}
+                          onError={(e) => (e.target.src = "/fallback-icon.svg")}
+                        />
+                      </span>
+                      <span className="text-secondary-text group-hover:text-accent-text transition-colors duration-200">
+                        {icon
+                          .replace(/([a-z])([A-Z])/g, "$1 $2")
+                          .replace("plusplus", "++")
+                          .replace("threedotjs", "Three.js")
+                          .replace("unrealengine", "Unreal Engine")}
+                      </span>
+                    </div>
+                  ))}
+                </div>
               </div>
-            ))}
+            </div>
+
+            {/* Web Development Column */}
+            <div className="animate-fade-in-up delay-100">
+              <div className="flex flex-col items-center text-center">
+                <div className="mb-4 w-16 h-16 rounded-full bg-primary-bg/20 backdrop-blur-sm flex items-center justify-center border border-accent-border/30 hover:bg-primary-bg/40 transition-all duration-300">
+                  <Image
+                    src="https://cdn.jsdelivr.net/npm/simple-icons@9.21.0/icons/nextdotjs.svg"
+                    alt="Next.js"
+                    width={32}
+                    height={32}
+                    className="text-tech-dark"
+                    onError={(e) => (e.target.src = "/fallback-icon.svg")}
+                  />
+                </div>
+                <h3 className="text-xl font-semibold text-accent-text mb-4">
+                  Web Development
+                </h3>
+                <div className="space-y-3">
+                  {[
+                    "react",
+                    "nextdotjs",
+                    "tailwindcss",
+                    "express",
+                    "typescript",
+                    "node.js",
+                  ].map((icon, i) => (
+                    <div
+                      key={i}
+                      className="flex items-center justify-center space-x-2 group"
+                    >
+                      <span className="w-5 h-5 flex-shrink-0 text-tech-dark">
+                        <Image
+                          src={`https://cdn.jsdelivr.net/npm/simple-icons@9.21.0/icons/${icon}.svg`}
+                          alt={icon}
+                          width={20}
+                          height={20}
+                          onError={(e) => (e.target.src = "/fallback-icon.svg")}
+                        />
+                      </span>
+                      <span className="text-secondary-text group-hover:text-accent-text transition-colors duration-200">
+                        {icon
+                          .replace(/([a-z])([A-Z])/g, "$1 $2")
+                          .replace("dotjs", ".js")
+                          .replace("css", " CSS")
+                          .replace("express", "Express.js")}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Other Skills Column */}
+            <div className="animate-fade-in-up delay-200">
+              <div className="flex flex-col items-center text-center">
+                <div className="mb-4 w-16 h-16 rounded-full bg-primary-bg/20 backdrop-blur-sm flex items-center justify-center border border-accent-border/30 hover:bg-primary-bg/40 transition-all duration-300">
+                  <Image
+                    src="https://cdn.jsdelivr.net/npm/simple-icons@9.21.0/icons/git.svg"
+                    alt="Git"
+                    width={32}
+                    height={32}
+                    className="text-tech-blue"
+                    onError={(e) => (e.target.src = "/fallback-icon.svg")}
+                  />
+                </div>
+                <h3 className="text-xl font-semibold text-accent-text mb-4">
+                  Other Skills
+                </h3>
+                <div className="space-y-3">
+                  {[
+                    "git",
+                    "linux",
+                    "docker",
+                    "jenkins",
+                    "amazonaws",
+                    "nginx",
+                  ].map((icon, i) => (
+                    <div
+                      key={i}
+                      className="flex items-center justify-center space-x-2 group"
+                    >
+                      <span className="w-5 h-5 flex-shrink-0 text-tech-blue">
+                        <Image
+                          src={`https://cdn.jsdelivr.net/npm/simple-icons@9.21.0/icons/${icon}.svg`}
+                          alt={icon}
+                          width={20}
+                          height={20}
+                          onError={(e) => (e.target.src = "/fallback-icon.svg")}
+                        />
+                      </span>
+                      <span className="text-secondary-text group-hover:text-accent-text transition-colors duration-200">
+                        {icon
+                          .replace(/([a-z])([A-Z])/g, "$1 $2")
+                          .replace("amazonaws", "AWS")
+                          .replace("nginx", "NGINX")}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
+
+          {/* Decorative Elements */}
+          <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-64 h-64 bg-decor-light rounded-full opacity-20 blur-3xl" />
+          <div className="absolute top-1/3 right-1/4 -translate-y-1/3 w-48 h-48 bg-decor-blue rounded-full opacity-30 blur-2xl" />
         </div>
       </section>
 

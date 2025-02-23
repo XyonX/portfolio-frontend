@@ -51,6 +51,25 @@ export default {
         "skills-bg": "var(--skills-bg, #64748B)", // slate-500
         "skills-bg-hover": "var(--skills-bg-hover, #475569)", // slate-600
       },
+      animation: {
+        "particle-flow": "particle 15s linear infinite",
+        rotate: "rotate 20s linear infinite",
+        float: "float 10s ease-in-out infinite",
+      },
+      keyframes: {
+        particle: {
+          "0%": { transform: "translateY(0) translateX(0)" },
+          "100%": { transform: "translateY(-100vh) translateX(100vw)" },
+        },
+        rotate: {
+          "0%": { transform: "rotate(0deg)" },
+          "100%": { transform: "rotate(360deg)" },
+        },
+        float: {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-20px)" },
+        },
+      },
     },
   },
   plugins: [],
