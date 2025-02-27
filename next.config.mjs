@@ -6,6 +6,7 @@ const nextConfig = {
       "source.unsplash.com",
       "avatars.githubusercontent.com",
       "cdn.jsdelivr.net",
+      "unpkg.com",
     ], // Allow Unsplash images
   },
 };

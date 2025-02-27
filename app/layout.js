@@ -1,4 +1,7 @@
+"use client";
+
 import { Geist, Geist_Mono } from "next/font/google";
+import { usePathname } from "next/navigation"; // Import usePathname
 import "./globals.css";
 import Navigation from "../components/Navigation";
 
@@ -13,10 +16,13 @@ const geistMono = Geist_Mono({
 });
 
 export default function RootLayout({ children }) {
+  const pathname = usePathname();
+  const isAdminRoute = pathname.startsWith("/admin"); // Check if it's an admin route
+
   return (
     <html lang="en">
       <body>
-        <Navigation />
+        {!isAdminRoute && <Navigation />} {/* Hide Navbar in admin routes */}
         {children}
       </body>
     </html>
