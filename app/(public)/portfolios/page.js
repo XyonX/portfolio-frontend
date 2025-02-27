@@ -1,10 +1,10 @@
 import React from "react";
-import BlogList from "../../components/blogs/BlogList";
+import PortfolioList from "../../../components/portfolios/PortfolioList";
 
 const page = () => {
   return (
     <div>
-      <BlogList />
+      <PortfolioList />
     </div>
   );
 };
