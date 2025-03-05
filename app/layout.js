@@ -18,11 +18,13 @@ const geistMono = Geist_Mono({
 export default function RootLayout({ children }) {
   const pathname = usePathname();
   const isAdminRoute = pathname.startsWith("/admin"); // Check if it's an admin route
+  const isAccessDenied = pathname.startsWith("/access-denied"); // Check if it's an admin route
 
   return (
     <html lang="en">
       <body>
-        {!isAdminRoute && <Navigation />} {/* Hide Navbar in admin routes */}
+        {!isAdminRoute && !isAccessDenied && <Navigation />}{" "}
+        {/* Hide Navbar in admin routes */}
         {children}
       </body>
     </html>

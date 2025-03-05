@@ -32,6 +32,7 @@ export default function SignInPage() {
       //const hashedPassword = await bcrypt.hash("FrotherWhisker69#", 10); // Replace with desired password
 
       // Send login request to API endpoint
+      console.log(`${API_BASE_URL}/api/auth/login`);
       const res = await fetch(`${API_BASE_URL}/api/auth/login`, {
         method: "POST",
         headers: {

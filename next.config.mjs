@@ -7,6 +7,8 @@ const nextConfig = {
       "avatars.githubusercontent.com",
       "cdn.jsdelivr.net",
       "unpkg.com",
+      "example.com",
+      "localhost",
     ], // Allow Unsplash images
   },
 };
