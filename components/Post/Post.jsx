@@ -2,12 +2,15 @@ import Image from "next/image";
 import React from "react";
 
 const Post = ({ post }) => {
+  const API_BASE_URL =
+    process.env.REACT_APP_API_BASE_URL || "http://localhost:3001"; // Fallback for local dev
+  console.log(JSON.stringify(post));
   return (
     <div className="border border-gray-200 bg-white shadow-md hover:shadow-lg transition-shadow duration-200 ease-out">
       {/* Image Container */}
       <div className="relative aspect-video w-full overflow-hidden">
         <Image
-          src={post.featuredImage}
+          src={`${API_BASE_URL}${post.featuredImage}`}
           fill
           className="object-cover"
           alt={post.title}

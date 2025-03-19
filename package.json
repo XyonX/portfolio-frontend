@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
+    "jose": "^6.0.10",
     "jsonwebtoken": "^9.0.2",
     "next": "15.1.7",
     "react": "^19.0.0",

@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export default function NewBlogPage() {
   const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+  const [description, setDescription] = useState("");
   const [slug, setSlug] = useState("");
   const [categories, setCategories] = useState("");
   const [tags, setTags] = useState("");
@@ -19,61 +19,68 @@ export default function NewBlogPage() {
   const router = useRouter();
 
   // Handle Markdown file upload and read its content
+  // const handleMdFileChange = (e) => {
+  //   const file = e.target.files[0];
+  //   if (file && file.name.endsWith(".md")) {
+  //     setMdFile(file);
+  //     const reader = new FileReader();
+  //     reader.onload = (event) => {
+  //       setContent(event.target.result); // Set content from .md file
+  //     };
+  //     reader.readAsText(file);
+  //   } else {
+  //     alert("Please upload a valid .md file");
+  //   }
+  // };
   const handleMdFileChange = (e) => {
     const file = e.target.files[0];
-    if (file && file.name.endsWith(".md")) {
+    if (file && (file.name.endsWith(".md") || file.type === "text/markdown")) {
       setMdFile(file);
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        setContent(event.target.result); // Set content from .md file
-      };
-      reader.readAsText(file);
     } else {
       alert("Please upload a valid .md file");
+      setMdFile(null);
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!title || !content || !slug || !featuredImage) {
-      alert(
-        "Please fill in all required fields: title, content, and slug, featured image"
-      );
+
+    if (!title || !slug || !featuredImage || !mdFile) {
+      alert("Please fill in required fields");
       return;
     }
+
     setIsSubmitting(true);
 
-    // Use FormData to handle text fields and files
     const formData = new FormData();
     formData.append("title", title);
-    formData.append("content", content);
+    formData.append("description", description);
     formData.append("slug", slug);
     formData.append("publicationDate", publicationDate);
-    formData.append("categories", categories); // Backend can split this
-    formData.append("tags", tags); // Backend can split this
+    formData.append("categories", categories);
+    formData.append("tags", tags);
     formData.append("status", status);
-    if (featuredImage) {
-      formData.append("featuredImage", featuredImage);
-    }
-    if (mdFile) {
-      formData.append("mdFile", mdFile); // Optional, if backend needs the file
-    }
+    formData.append("featuredImage", featuredImage);
+    formData.append("mdFile", mdFile);
 
     try {
       let API_BASE_URL =
-        process.env.REACT_APP_API_BASE_URL || "http://localhost:3001"; // Fallback for local dev
+        process.env.REACT_APP_API_BASE_URL || "http://localhost:3001";
+      console.log("[API] Using base URL:", API_BASE_URL);
 
       const res = await fetch(`${API_BASE_URL}/api/blogs`, {
         method: "POST",
-        body: formData, // No headers needed for FormData; browser sets multipart/form-data
+        body: formData,
       });
+
       if (res.ok) {
         router.push("/admin/blogs");
       } else {
-        alert("Failed to create blog");
+        const errorData = await res.json();
+        alert(errorData.error || "Failed to create blog");
       }
     } catch (error) {
-      alert("An error occurred");
+      alert(error.message || "An error occurred");
     } finally {
       setIsSubmitting(false);
     }
@@ -101,6 +108,22 @@ export default function NewBlogPage() {
             className="mt-1 block w-full px-3 py-2 border border-accent-border rounded-md shadow-sm focus:outline-none focus:ring-accent-text focus:border-accent-text"
           />
         </div>
+        <div>
+          <label
+            htmlFor="description"
+            className="block text-sm font-medium text-secondary-text"
+          >
+            Description
+          </label>
+          <textarea
+            type="text"
+            id="descrtiption"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            placeholder="Enter the short blog description"
+            className="mt-1 block w-full px-3 py-2 border border-accent-border rounded-md shadow-sm focus:outline-none focus:ring-accent-text focus:border-accent-text"
+          ></textarea>
+        </div>
 
         <div>
           <label
@@ -116,39 +139,6 @@ export default function NewBlogPage() {
             onChange={(e) => setSlug(e.target.value)}
             placeholder="Enter a unique slug (e.g., my-blog-post)"
             className="mt-1 block w-full px-3 py-2 border border-accent-border rounded-md shadow-sm focus:outline-none focus:ring-accent-text focus:border-accent-text"
-          />
-        </div>
-
-        <div>
-          <label
-            htmlFor="content"
-            className="block text-sm font-medium text-secondary-text"
-          >
-            Content
-          </label>
-          <textarea
-            id="content"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            rows={10}
-            placeholder="Write your blog content here..."
-            className="mt-1 block w-full px-3 py-2 border border-accent-border rounded-md shadow-sm focus:outline-none focus:ring-accent-text focus:border-accent-text"
-          />
-        </div>
-
-        <div>
-          <label
-            htmlFor="mdFile"
-            className="block text-sm font-medium text-secondary-text"
-          >
-            Upload Content from .md File (Optional)
-          </label>
-          <input
-            type="file"
-            id="mdFile"
-            accept=".md"
-            onChange={handleMdFileChange}
-            className="mt-1 block w-full"
           />
         </div>
 
@@ -214,6 +204,21 @@ export default function NewBlogPage() {
             id="featuredImage"
             accept="image/*"
             onChange={(e) => setFeaturedImage(e.target.files[0])}
+            className="mt-1 block w-full"
+          />
+        </div>
+        <div>
+          <label
+            htmlFor="mdFile"
+            className="block text-sm font-medium text-secondary-text"
+          >
+            Content MD File
+          </label>
+          <input
+            type="file"
+            id="mdFile"
+            accept=".md"
+            onChange={handleMdFileChange}
             className="mt-1 block w-full"
           />
         </div>
