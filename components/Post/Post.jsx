@@ -12,11 +12,11 @@ const Post = ({ post }) => {
         <Image
           src={`${API_BASE_URL}${post.featuredImage}`}
           fill
-          className="object-cover"
+          className="object-fit"
           alt={post.title}
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
-        {/* Category Badges */}
+        {/* Category Badges
         {post.categories?.length > 0 && (
           <div className="absolute top-2 right-2 flex gap-1">
             {post.categories.slice(0, 2).map((category, index) => (
@@ -28,7 +28,7 @@ const Post = ({ post }) => {
               </span>
             ))}
           </div>
-        )}
+        )} */}
       </div>
 
       {/* Content Container */}

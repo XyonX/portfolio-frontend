@@ -1,16 +1,12 @@
 import React from "react";
 import { notFound } from "next/navigation";
-// import mongoose from "mongoose";
-// import Blog from "@/models/Blog";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
 import "highlight.js/styles/github-dark.css";
 import Link from "next/link";
 import Image from "next/image";
-
 import Head from "next/head";
-
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { tomorrow } from "react-syntax-highlighter/dist/esm/styles/prism";
 
@@ -18,15 +14,11 @@ async function getBlogBySlug(slug) {
   const API_BASE_URL = process.env.API_BASE_URL || "http://localhost:3001";
 
   try {
-    // const res = await fetch(`${API_BASE_URL}/api/blogs?slug=${slug}`, {
-    //   next: { revalidate: 3600 }, // ISR every hour
-    // });
     const res = await fetch(`${API_BASE_URL}/api/blogs/${slug}`);
-
     if (!res.ok) throw new Error("Failed to fetch");
     const json = await res.json();
     if (!json.data) return null;
-    console.log("Fethched blog by slug", json.data);
+    console.log("Fetched blog by slug", json.data);
     return json.data;
   } catch (error) {
     console.error("Fetch error:", error);
@@ -50,11 +42,14 @@ export async function generateMetadata({ params }) {
 }
 
 const BlogPostPage = async ({ params }) => {
+  const API_BASE_URL =
+    process.env.REACT_APP_API_BASE_URL || "http://localhost:3001"; // Fallback for local dev
   const blog = await getBlogBySlug(params.slug);
 
   if (!blog) {
     notFound();
   }
+  console.log(blog.content);
 
   return (
     <div className="bg-primary-bg min-h-screen">
@@ -112,7 +107,7 @@ const BlogPostPage = async ({ params }) => {
           {blog.featuredImage && (
             <div className="mb-8">
               <img
-                src={blog.featuredImage}
+                src={`${API_BASE_URL}${blog.featuredImage}`}
                 alt={blog.title}
                 className="w-full h-auto rounded-lg shadow-md"
               />
@@ -125,25 +120,45 @@ const BlogPostPage = async ({ params }) => {
               remarkPlugins={[remarkGfm]}
               rehypePlugins={[rehypeHighlight]}
               components={{
-                img: ({ node, ...props }) => (
-                  <div className="my-8">
-                    <Image
-                      {...props}
-                      width={1200}
-                      height={600}
-                      className="rounded-lg shadow-lg"
-                      alt={props.alt || "Blog post image"}
-                    />
-                  </div>
-                ),
-                code: ({ node, inline, className, children, ...props }) => (
-                  <code
-                    className={`${className} p-2 rounded-lg bg-gray-800 text-gray-100`}
-                    {...props}
-                  >
-                    {children}
-                  </code>
-                ),
+                code({ node, inline, className, children, ...props }) {
+                  const match = /language-(\w+)/.exec(className || "");
+                  if (!inline && match) {
+                    return (
+                      <SyntaxHighlighter
+                        style={tomorrow}
+                        language={match[1]}
+                        PreTag="div"
+                        {...props}
+                      >
+                        {String(children).replace(/\n$/, "")}
+                      </SyntaxHighlighter>
+                    );
+                  } else {
+                    return (
+                      <code
+                        className={`${
+                          className || ""
+                        } p-1 rounded bg-gray-100 text-gray-800`}
+                        {...props}
+                      >
+                        {children}
+                      </code>
+                    );
+                  }
+                },
+                img({ node, ...props }) {
+                  return (
+                    <div className="my-8">
+                      <Image
+                        {...props}
+                        width={1200}
+                        height={600}
+                        className="rounded-lg shadow-lg"
+                        alt={props.alt || "Blog post image"}
+                      />
+                    </div>
+                  );
+                },
               }}
             >
               {blog.content}
@@ -163,3 +178,39 @@ const BlogPostPage = async ({ params }) => {
 };
 
 export default BlogPostPage;
+
+// import React from "react";
+// import ReactMarkdown from "react-markdown";
+// import { notFound } from "next/navigation";
+
+// async function getBlogBySlug(slug) {
+//   const API_BASE_URL = process.env.API_BASE_URL || "http://localhost:3001";
+
+//   try {
+//     const res = await fetch(`${API_BASE_URL}/api/blogs/${slug}`);
+//     if (!res.ok) throw new Error("Failed to fetch");
+//     const json = await res.json();
+//     if (!json.data) return null;
+//     console.log("Fetched blog by slug", json.data);
+//     return json.data;
+//   } catch (error) {
+//     console.error("Fetch error:", error);
+//     return null;
+//   }
+// }
+
+// const page = async ({ params }) => {
+//   const blog = await getBlogBySlug(params.slug);
+
+//   if (!blog) {
+//     notFound();
+//   }
+
+//   return (
+//     <div className="prose">
+//       <ReactMarkdown>{blog.content}</ReactMarkdown>
+//     </div>
+//   );
+// };
+
+// export default page;
