@@ -1,5 +1,6 @@
 import React from "react";
 import Post from "../Post/Post";
+import Link from "next/link";
 
 async function getPortfolios() {
   const API_BASE_URL =
@@ -26,7 +27,9 @@ const PortfolioList = async () => {
       </div>
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
         {Portfolios.map((item, index) => (
-          <Post key={item.id} post={item} />
+          <Link href={`/portfolios/${item.slug}`} key={item.id}>
+            <Post post={item} />
+          </Link>
         ))}
       </div>
     </div>

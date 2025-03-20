@@ -9,6 +9,7 @@ const nextConfig = {
       "unpkg.com",
       "example.com",
       "localhost",
+      "raw.githubusercontent.com",
     ], // Allow Unsplash images
   },
 };

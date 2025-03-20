@@ -95,7 +95,7 @@ const BlogGrid = ({ blogs }) => {
       {/* Blog Grid */}
       <div className={getGridClasses()}>
         {blogs.map((blog) => (
-          <Link href={`/content/${blog.slug}`} key={blog.id}>
+          <Link href={`/blogs/${blog.slug}`} key={blog.id}>
             <Post post={blog} />
           </Link>
         ))}

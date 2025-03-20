@@ -74,7 +74,7 @@ export default function AdminDashboard() {
         {/* Quick Actions */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
           <Link
-            href="/admin/projects/new"
+            href="/admin/portfolios/new"
             className="bg-primary-bg/50 backdrop-blur-sm p-6 rounded-xl hover:shadow-md transition-shadow"
           >
             <div className="flex items-center space-x-4">
