@@ -3,8 +3,11 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { motion, useReducedMotion } from "framer-motion";
 
 export default function Home() {
+  const shouldReduceMotion = useReducedMotion();
+
   const projects = [
     {
       title: "Project 1",
@@ -38,13 +41,17 @@ export default function Home() {
   return (
     <div className="bg-primary-bg">
       {/* Hero Section */}
-
       <section className="relative bg-gradient-to-br from-gradient-start via-gradient-mid to-gradient-end overflow-hidden">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-16 pb-24 md:pt-24">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Left Content (Unchanged) */}
-            <div className="text-center lg:text-left animate-fade-in">
-              <div className="inline-flex items-center mb-6">
+            {/* Left Content */}
+            <div className="text-center lg:text-left">
+              <motion.div
+                initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: shouldReduceMotion ? 0 : 0.5 }}
+                className="inline-flex items-center mb-6"
+              >
                 <span className="relative flex h-3 w-3 mr-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-status-light opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-3 w-3 bg-status-dark"></span>
@@ -52,23 +59,47 @@ export default function Home() {
                 <span className="text-sm font-medium text-secondary-text">
                   Available for projects
                 </span>
-              </div>
+              </motion.div>
 
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-4">
+              <motion.h1
+                initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: shouldReduceMotion ? 0 : 0.5,
+                  delay: 0.2,
+                }}
+                className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-4"
+              >
                 <span className="block mb-4">Joydip Chakraborty</span>
                 <span className="sr-only">Game and Web Developer</span>
-                <span aria-hidden="true" className="block  text-accent-text">
+                <span aria-hidden="true" className="block text-accent-text">
                   <span className="block">Game & Web</span>
                   <span className="block">Developer</span>
                 </span>
-              </h1>
+              </motion.h1>
 
-              <p className="text-lg sm:text-xl text-secondary-text mb-8 max-w-md mx-auto lg:mx-0 px-3 sm:px-0">
-                Hi, "I'm Joydip chakrabory a passionate game developer skilled
-                in Unreal Engine and web development using the MERN stack
-              </p>
+              <motion.p
+                initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: shouldReduceMotion ? 0 : 0.5,
+                  delay: 0.4,
+                }}
+                className="text-lg sm:text-xl text-secondary-text mb-8 max-w-md mx-auto lg:mx-0 px-3 sm:px-0"
+              >
+                Hi, I'm Joydip Chakraborty, a passionate game developer and web
+                developer skilled in Unreal Engine and the MERN stack.
+              </motion.p>
 
-              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+              <motion.div
+                initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: shouldReduceMotion ? 0 : 0.5,
+                  delay: 0.6,
+                }}
+                className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+              >
                 <Link
                   href="/portfolios"
                   className="px-8 py-3 bg-primary-btn text-light-text font-semibold rounded-lg hover:bg-primary-btn-hover transition-all duration-300 shadow-md hover:shadow-lg"
@@ -81,17 +112,19 @@ export default function Home() {
                 >
                   Get in Touch
                 </Link>
-              </div>
+              </motion.div>
             </div>
 
-            {/* Updated Right Visual - Aligned to Right */}
+            {/* Right Visual */}
             <div className="relative hidden lg:block">
-              <div className="relative w-full flex justify-end">
+              <motion.div
+                initial={{ opacity: 0, scale: shouldReduceMotion ? 1 : 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: shouldReduceMotion ? 0 : 0.8 }}
+                className="relative w-full flex justify-end"
+              >
                 <div className="relative w-80 h-80">
-                  {/* Reduced size to fit better */}
-                  {/* Background Circle */}
                   <div className="absolute inset-0 bg-decor-light rounded-full opacity-20 animate-pulse-slow"></div>
-                  {/* Tech Icons (Extending Beyond Boundaries) */}
                   <div className="absolute -inset-12 animate-spin-slow">
                     <div className="absolute w-16 h-16 top-0 left-1/2 -translate-x-1/2 -translate-y-12 bg-primary-bg rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition-transform duration-300">
                       <Image
@@ -117,7 +150,6 @@ export default function Home() {
                       />
                     </div>
                   </div>
-                  {/* Additional Tech Icon Example */}
                   <div
                     className="absolute -inset-12 animate-spin-slow"
                     style={{ animationDelay: "-5s" }}
@@ -139,14 +171,13 @@ export default function Home() {
                     <div className="absolute w-16 h-16 right-0 top-1/2 translate-x-12 -translate-y-1/2 bg-primary-bg rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition-transform duration-300">
                       <Image
                         src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/unrealengine.svg"
-                        alt="Tailwind CSS"
+                        alt="Unreal Engine"
                         width={32}
                         height={32}
                         className="text-tech-dark"
                       />
                     </div>
                   </div>
-                  {/* Center Profile Image - Aligned Right */}
                   <div className="absolute inset-4 bg-white rounded-full shadow-xl overflow-hidden border-4 border-light-border">
                     <Image
                       src="https://avatars.githubusercontent.com/u/33289572?v=4"
@@ -157,31 +188,50 @@ export default function Home() {
                     />
                   </div>
                 </div>
-              </div>
-
-              {/* Floating Text - Adjusted Position */}
+              </motion.div>
               <div className="absolute bottom-0 right-0 translate-y-12 text-center">
-                <span className="inline-block px-4 py-2 bg-primary-btn text-light-text text-sm font-medium rounded-full shadow-md">
+                <motion.span
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{
+                    duration: shouldReduceMotion ? 0 : 0.5,
+                    delay: 0.8,
+                  }}
+                  className="inline-block px-4 py-2 bg-primary-btn text-light-text text-sm font-medium rounded-full shadow-md"
+                >
                   Core Technologies
-                </span>
+                </motion.span>
               </div>
             </div>
           </div>
         </div>
-        {/* Decorative Elements */}
         <div className="absolute top-0 right-0 w-72 h-72 bg-decor-light rounded-full -z-10 opacity-50 transform translate-x-1/3 -translate-y-1/3 blur-3xl" />
         <div className="absolute bottom-0 left-0 w-64 h-64 bg-decor-blue rounded-full -z-10 opacity-50 transform -translate-x-1/4 translate-y-1/4 blur-2xl" />
       </section>
+
       {/* Featured Projects Section */}
       <section className="py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-primary-text text-center mb-8">
+          <motion.h2
+            initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false }}
+            transition={{ duration: shouldReduceMotion ? 0 : 0.5 }}
+            className="text-3xl font-bold text-primary-text text-center mb-8"
+          >
             Featured Projects
-          </h2>
+          </motion.h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects.map((project, index) => (
-              <div
+              <motion.div
                 key={index}
+                initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false }}
+                transition={{
+                  duration: shouldReduceMotion ? 0 : 0.5,
+                  delay: index * 0.1,
+                }}
                 className="bg-primary-bg shadow-sm rounded-lg overflow-hidden hover:shadow-md transition-shadow duration-300"
               >
                 <div className="relative w-full h-48">
@@ -209,24 +259,35 @@ export default function Home() {
                     </Link>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
       {/* Skills Section */}
-      {/* Option 1: Diagonal Gradient Mesh
-      <section className="relative py-16 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-gradient-start/30 via-gradient-mid/20 to-gradient-end/30 overflow-hidden"> */}
       <section className="relative py-16 bg-primary-bg overflow-hidden">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-primary-text text-center mb-12 animate-fade-in">
+          <motion.h2
+            initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false }}
+            transition={{ duration: shouldReduceMotion ? 0 : 0.5 }}
+            className="text-3xl font-bold text-primary-text text-center mb-12"
+          >
             Technical Expertise
-          </h2>
-
+          </motion.h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-8 lg:gap-12 relative z-10">
-            {/* Game Development Column */}
-            <div className="animate-fade-in-up">
+            {/* Game Development */}
+            <motion.div
+              initial={{ opacity: 0, scale: shouldReduceMotion ? 1 : 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: false }}
+              transition={{
+                duration: shouldReduceMotion ? 0 : 0.5,
+                delay: 0.1,
+              }}
+            >
               <div className="flex flex-col items-center text-center">
                 <div className="mb-4 w-16 h-16 rounded-full bg-primary-bg/20 backdrop-blur-sm flex items-center justify-center border border-accent-border/30 hover:bg-primary-bg/40 transition-all duration-300">
                   <Image
@@ -271,10 +332,18 @@ export default function Home() {
                   )}
                 </div>
               </div>
-            </div>
+            </motion.div>
 
-            {/* Web Development Column */}
-            <div className="animate-fade-in-up delay-100">
+            {/* Web Development */}
+            <motion.div
+              initial={{ opacity: 0, scale: shouldReduceMotion ? 1 : 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: false }}
+              transition={{
+                duration: shouldReduceMotion ? 0 : 0.5,
+                delay: 0.2,
+              }}
+            >
               <div className="flex flex-col items-center text-center">
                 <div className="mb-4 w-16 h-16 rounded-full bg-primary-bg/20 backdrop-blur-sm flex items-center justify-center border border-accent-border/30 hover:bg-primary-bg/40 transition-all duration-300">
                   <Image
@@ -321,9 +390,18 @@ export default function Home() {
                   ))}
                 </div>
               </div>
-            </div>
-            {/* Programming Languages Column */}
-            <div className="animate-fade-in-up delay-300">
+            </motion.div>
+
+            {/* Programming Languages */}
+            <motion.div
+              initial={{ opacity: 0, scale: shouldReduceMotion ? 1 : 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: false }}
+              transition={{
+                duration: shouldReduceMotion ? 0 : 0.5,
+                delay: 0.3,
+              }}
+            >
               <div className="flex flex-col items-center text-center">
                 <div className="mb-4 w-16 h-16 rounded-full bg-primary-bg/20 backdrop-blur-sm flex items-center justify-center border border-accent-border/30 hover:bg-primary-bg/40 transition-all duration-300">
                   <Image
@@ -368,9 +446,18 @@ export default function Home() {
                   )}
                 </div>
               </div>
-            </div>
-            {/* Other Skills Column */}
-            <div className="animate-fade-in-up delay-200">
+            </motion.div>
+
+            {/* Other Skills */}
+            <motion.div
+              initial={{ opacity: 0, scale: shouldReduceMotion ? 1 : 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: false }}
+              transition={{
+                duration: shouldReduceMotion ? 0 : 0.5,
+                delay: 0.4,
+              }}
+            >
               <div className="flex flex-col items-center text-center">
                 <div className="mb-4 w-16 h-16 rounded-full bg-primary-bg/20 backdrop-blur-sm flex items-center justify-center border border-accent-border/30 hover:bg-primary-bg/40 transition-all duration-300">
                   <Image
@@ -403,85 +490,27 @@ export default function Home() {
                       <span className="text-secondary-text group-hover:text-accent-text transition-colors duration-200">
                         {icon
                           .replace(/([a-z])([A-Z])/g, "$1 $2")
-                          .replace("amazonaws", "AWS")
-                          .replace("nginx", "NGINX")}
+                          .replace("amazonaws", "AWS")}
                       </span>
                     </div>
                   ))}
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
-
-          {/* Decorative Elements */}
           <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-64 h-64 bg-decor-light rounded-full opacity-20 blur-3xl" />
           <div className="absolute top-1/3 right-1/4 -translate-y-1/3 w-48 h-48 bg-decor-blue rounded-full opacity-30 blur-2xl" />
         </div>
       </section>
 
-      {/* Articles
-      <section className="py-16 bg-primary-bg">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-primary-text text-center mb-12">
-            Recent Articles
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                title: "Mastering Next.js: Tips for Scalable Apps",
-                excerpt:
-                  "Learn how to structure your Next.js projects for performance and scalability.",
-                date: "Feb 10, 2025",
-                link: "/blog/nextjs-tips",
-              },
-              {
-                title: "GraphQL vs REST: A Developer’s Perspective",
-                excerpt:
-                  "Breaking down the pros and cons of GraphQL and REST APIs in real-world scenarios.",
-                date: "Jan 25, 2025",
-                link: "/blog/graphql-vs-rest",
-              },
-              {
-                title: "Building Responsive UI with Tailwind CSS",
-                excerpt:
-                  "A guide to creating beautiful, responsive designs with Tailwind CSS.",
-                date: "Jan 15, 2025",
-                link: "/blog/tailwind-responsive",
-              },
-            ].map((article, index) => (
-              <div
-                key={index}
-                className="bg-secondary-bg rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 p-6"
-              >
-                <h3 className="text-xl font-semibold text-primary-text mb-2">
-                  {article.title}
-                </h3>
-                <p className="text-sm text-secondary-text mb-4">
-                  {article.date}
-                </p>
-                <p className="text-secondary-text mb-4">{article.excerpt}</p>
-                <Link
-                  href={article.link}
-                  className="text-sm font-medium text-accent-text hover:text-primary-btn-hover transition-colors duration-200"
-                >
-                  Read More →
-                </Link>
-              </div>
-            ))}
-          </div>
-          <div className="mt-12 text-center">
-            <Link
-              href="/blog"
-              className="inline-block px-6 py-3 text-base font-medium text-light-text bg-dark-btn rounded-md hover:bg-dark-btn-hover transition-colors duration-200"
-            >
-              View All Articles
-            </Link>
-          </div>
-        </div>
-      </section> */}
-
       {/* Contact Section */}
-      <section className="py-16">
+      <motion.section
+        initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: false }}
+        transition={{ duration: shouldReduceMotion ? 0 : 0.5 }}
+        className="py-16"
+      >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold text-gray-900">
             Let's Work Together!
@@ -499,7 +528,7 @@ export default function Home() {
             </Link>
           </div>
         </div>
-      </section>
+      </motion.section>
     </div>
   );
 }
