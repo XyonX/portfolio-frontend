@@ -11,7 +11,8 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { tomorrow } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 async function getBlogBySlug(slug) {
-  const API_BASE_URL = process.env.API_BASE_URL || "http://localhost:3001";
+  const API_BASE_URL =
+    process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3001";
 
   try {
     const res = await fetch(`${API_BASE_URL}/api/blogs/${slug}`);
@@ -44,7 +45,7 @@ export async function generateMetadata({ params }) {
 
 const BlogPostPage = async ({ params }) => {
   const API_BASE_URL =
-    process.env.REACT_APP_API_BASE_URL || "http://localhost:3001"; // Fallback for local dev
+    process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3001"; // Fallback for local dev
 
   const { slug } = await params;
   const blog = await getBlogBySlug(slug);
