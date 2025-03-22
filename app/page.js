@@ -55,13 +55,17 @@ export default function Home() {
               </div>
 
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-4">
-                Crafting Digital
-                <span className="block text-accent-text">Excellence</span>
+                <span className="block mb-4">Joydip Chakraborty</span>
+                <span className="sr-only">Game and Web Developer</span>
+                <span aria-hidden="true" className="block  text-accent-text">
+                  <span className="block">Game & Web</span>
+                  <span className="block">Developer</span>
+                </span>
               </h1>
 
-              <p className="text-lg sm:text-xl text-secondary-text mb-8 max-w-md mx-auto lg:mx-0">
-                Hi, I'm Joy - a Full-Stack Developer passionate about creating
-                innovative web solutions that drive impact.
+              <p className="text-lg sm:text-xl text-secondary-text mb-8 max-w-md mx-auto lg:mx-0 px-3 sm:px-0">
+                Hi, "I'm Joydip chakrabory a passionate game developer skilled
+                in Unreal Engine and web development using the MERN stack
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
