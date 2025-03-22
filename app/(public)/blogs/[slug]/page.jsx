@@ -27,7 +27,8 @@ async function getBlogBySlug(slug) {
 }
 
 export async function generateMetadata({ params }) {
-  const blog = await getBlogBySlug(params.slug);
+  const { slug } = await params;
+  const blog = await getBlogBySlug(slug);
   if (!blog) return { title: "Post Not Found" };
 
   return {
@@ -44,12 +45,13 @@ export async function generateMetadata({ params }) {
 const BlogPostPage = async ({ params }) => {
   const API_BASE_URL =
     process.env.REACT_APP_API_BASE_URL || "http://localhost:3001"; // Fallback for local dev
-  const blog = await getBlogBySlug(params.slug);
+
+  const { slug } = await params;
+  const blog = await getBlogBySlug(slug);
 
   if (!blog) {
     notFound();
   }
-  console.log(blog.content);
 
   return (
     <div className="bg-primary-bg min-h-screen">

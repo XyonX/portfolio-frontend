@@ -11,15 +11,14 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { tomorrow } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 async function getPortfolioBySlug(slug) {
-  const API_BASE_URL = process.env.API_BASE_URL || "http://localhost:3001";
+  const API_BASE_URL =
+    process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3001";
 
   try {
     const res = await fetch(`${API_BASE_URL}/api/portfolios/${slug}`);
     if (!res.ok) throw new Error("Failed to fetch");
     const json = await res.json();
-    if (!json.data) return null;
-    console.log("Fetched portfolio by slug", json.data);
-    return json.data;
+    return json.data || null;
   } catch (error) {
     console.error("Fetch error:", error);
     return null;
@@ -27,7 +26,8 @@ async function getPortfolioBySlug(slug) {
 }
 
 export async function generateMetadata({ params }) {
-  const portfolio = await getPortfolioBySlug(params.slug);
+  const { slug } = await params;
+  const portfolio = await getPortfolioBySlug(slug);
   if (!portfolio) return { title: "Post Not Found" };
 
   return {
@@ -42,14 +42,15 @@ export async function generateMetadata({ params }) {
 }
 
 const PortfolioPostPage = async ({ params }) => {
-  const API_BASE_URL =
-    process.env.REACT_APP_API_BASE_URL || "http://localhost:3001"; // Fallback for local dev
-  const portfolio = await getPortfolioBySlug(params.slug);
+  const { slug } = await params; // ✅ Extract `slug` first
+  const portfolio = await getPortfolioBySlug(slug);
 
   if (!portfolio) {
     notFound();
   }
-  console.log(portfolio.content);
+
+  const API_BASE_URL =
+    process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3001";
 
   return (
     <div className="bg-primary-bg min-h-screen">

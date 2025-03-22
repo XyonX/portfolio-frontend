@@ -65,7 +65,7 @@ export default function NewPortfolioPage() {
 
     try {
       let API_BASE_URL =
-        process.env.REACT_APP_API_BASE_URL || "http://localhost:3001";
+        process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3001";
       console.log("[API] Using base URL:", API_BASE_URL);
 
       const res = await fetch(`${API_BASE_URL}/api/portfolios`, {
