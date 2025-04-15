@@ -185,62 +185,63 @@ export default function Home() {
         <div className="absolute bottom-0 left-0 w-64 h-64 bg-decor-blue rounded-full -z-10 opacity-50 transform -translate-x-1/4 translate-y-1/4 blur-2xl" />
       </section>
 
-      {/* Featured Projects Section */}
-      <section className="py-16">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <motion.h2
-            initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false }}
-            transition={{ duration: shouldReduceMotion ? 0 : 0.5 }}
-            className="text-3xl font-bold text-primary-text text-center mb-8"
-          >
-            Featured Projects
-          </motion.h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {featuredPortfolios.map((post, index) => (
-              <Link href={`/portfolios/${post.slug}`} key={index}>
-                <motion.div
-                  initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: false }}
-                  transition={{
-                    duration: shouldReduceMotion ? 0 : 0.5,
-                    delay: index * 0.1,
-                  }}
-                  className="bg-primary-bg shadow-sm rounded-lg overflow-hidden hover:shadow-md transition-shadow duration-300"
-                >
-                  <div className="relative w-full h-48">
-                    <Image
-                      src={`${API_BASE_URL}${post.featuredImage}`}
-                      alt={post.title}
-                      layout="fill"
-                      objectFit="cover"
-                      // onError={(e) => (e.target.src = project.fallbackUrl)}
-                    />
-                  </div>
-                  <div className="p-6">
-                    <h3 className="text-xl font-bold text-primary-text">
-                      {post.title}
-                    </h3>
-                    <p className="mt-2 text-secondary-text">
-                      {post.description}
-                    </p>
-                    <div className="mt-4">
-                      <Link
-                        href={`/portfolios/${post.slug}`}
-                        className="text-sm font-medium text-accent-text hover:text-primary-btn-hover transition-colors duration-200"
-                      >
-                        View Project →
-                      </Link>
+      {featuredPortfolios && featuredPortfolios.length > 0 && (
+        <section className="py-16">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <motion.h2
+              initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false }}
+              transition={{ duration: shouldReduceMotion ? 0 : 0.5 }}
+              className="text-3xl font-bold text-primary-text text-center mb-8"
+            >
+              Featured Projects
+            </motion.h2>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {featuredPortfolios.map((post, index) => (
+                <Link href={`/portfolios/${post.slug}`} key={index}>
+                  <motion.div
+                    initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 50 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: false }}
+                    transition={{
+                      duration: shouldReduceMotion ? 0 : 0.5,
+                      delay: index * 0.1,
+                    }}
+                    className="bg-primary-bg shadow-sm rounded-lg overflow-hidden hover:shadow-md transition-shadow duration-300"
+                  >
+                    <div className="relative w-full h-48">
+                      <Image
+                        src={`${API_BASE_URL}${post.featuredImage}`}
+                        alt={post.title}
+                        layout="fill"
+                        objectFit="cover"
+                      />
                     </div>
-                  </div>
-                </motion.div>
-              </Link>
-            ))}
+                    <div className="p-6">
+                      <h3 className="text-xl font-bold text-primary-text">
+                        {post.title}
+                      </h3>
+                      <p className="mt-2 text-secondary-text">
+                        {post.description}
+                      </p>
+                      <div className="mt-4">
+                        <Link
+                          href={`/portfolios/${post.slug}`}
+                          className="text-sm font-medium text-accent-text hover:text-primary-btn-hover transition-colors duration-200"
+                        >
+                          View Project →
+                        </Link>
+                      </div>
+                    </div>
+                  </motion.div>
+                </Link>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* Skills Section */}
       <section className="relative py-16 bg-primary-bg overflow-hidden">

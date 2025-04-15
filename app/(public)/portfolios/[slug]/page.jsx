@@ -187,39 +187,3 @@ const PortfolioPostPage = async ({ params }) => {
 };
 
 export default PortfolioPostPage;
-
-// import React from "react";
-// import ReactMarkdown from "react-markdown";
-// import { notFound } from "next/navigation";
-
-// async function getPortfolioBySlug(slug) {
-//   const API_BASE_URL = process.env.API_BASE_URL || "http://localhost:3001";
-
-//   try {
-//     const res = await fetch(`${API_BASE_URL}/api/portfolios/${slug}`);
-//     if (!res.ok) throw new Error("Failed to fetch");
-//     const json = await res.json();
-//     if (!json.data) return null;
-//     console.log("Fetched portfolio by slug", json.data);
-//     return json.data;
-//   } catch (error) {
-//     console.error("Fetch error:", error);
-//     return null;
-//   }
-// }
-
-// const page = async ({ params }) => {
-//   const portfolio = await getPortfolioBySlug(params.slug);
-
-//   if (!portfolio) {
-//     notFound();
-//   }
-
-//   return (
-//     <div className="prose">
-//       <ReactMarkdown>{portfolio.content}</ReactMarkdown>
-//     </div>
-//   );
-// };
-
-// export default page;
