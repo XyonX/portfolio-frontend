@@ -4,6 +4,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { usePathname } from "next/navigation"; // Import usePathname
 import "./globals.css";
 import Navigation from "../components/Navigation";
+import { AppProvider } from "./AppProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,11 +23,13 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="en">
-      <body>
-        {!isAdminRoute && !isAccessDenied && <Navigation />}{" "}
-        {/* Hide Navbar in admin routes */}
-        {children}
-      </body>
+      <AppProvider>
+        <body>
+          {!isAdminRoute && !isAccessDenied && <Navigation />}{" "}
+          {/* Hide Navbar in admin routes */}
+          {children}
+        </body>
+      </AppProvider>
     </html>
   );
 }

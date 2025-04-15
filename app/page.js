@@ -4,39 +4,15 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
+import { useAppContext } from "./AppProvider";
 
 export default function Home() {
+  const API_BASE_URL =
+    process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3001"; // Fallback for local dev
+
   const shouldReduceMotion = useReducedMotion();
 
-  const projects = [
-    {
-      title: "Project 1",
-      description:
-        "A responsive e-commerce platform built with Next.js and Tailwind CSS.",
-      imageUrl:
-        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=300&fit=crop",
-      fallbackUrl: "/images/project1.jpg",
-      link: "/projects/project-1",
-    },
-    {
-      title: "Project 2",
-      description:
-        "A full-stack blog application using Node.js, Express, and MongoDB.",
-      imageUrl:
-        "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&h=300&fit=crop",
-      fallbackUrl: "/images/project2.jpg",
-      link: "/projects/project-2",
-    },
-    {
-      title: "Project 3",
-      description:
-        "A real-time chat application powered by WebSocket and React.",
-      imageUrl:
-        "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=400&h=300&fit=crop",
-      fallbackUrl: "/images/project3.jpg",
-      link: "/projects/project-3",
-    },
-  ];
+  const { portfolios, featuredPortfolios } = useAppContext();
 
   return (
     <div className="bg-primary-bg">
@@ -222,7 +198,7 @@ export default function Home() {
             Featured Projects
           </motion.h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project, index) => (
+            {featuredPortfolios.map((post, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 50 }}
@@ -236,23 +212,21 @@ export default function Home() {
               >
                 <div className="relative w-full h-48">
                   <Image
-                    src={project.imageUrl}
-                    alt={project.title}
+                    src={`${API_BASE_URL}${post.featuredImage}`}
+                    alt={post.title}
                     layout="fill"
                     objectFit="cover"
-                    onError={(e) => (e.target.src = project.fallbackUrl)}
+                    // onError={(e) => (e.target.src = project.fallbackUrl)}
                   />
                 </div>
                 <div className="p-6">
                   <h3 className="text-xl font-bold text-primary-text">
-                    {project.title}
+                    {post.title}
                   </h3>
-                  <p className="mt-2 text-secondary-text">
-                    {project.description}
-                  </p>
+                  <p className="mt-2 text-secondary-text">{post.description}</p>
                   <div className="mt-4">
                     <Link
-                      href={project.link}
+                      href={`/portfolios/${post.slug}`}
                       className="text-sm font-medium text-accent-text hover:text-primary-btn-hover transition-colors duration-200"
                     >
                       View Project →
