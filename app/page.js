@@ -199,41 +199,44 @@ export default function Home() {
           </motion.h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {featuredPortfolios.map((post, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false }}
-                transition={{
-                  duration: shouldReduceMotion ? 0 : 0.5,
-                  delay: index * 0.1,
-                }}
-                className="bg-primary-bg shadow-sm rounded-lg overflow-hidden hover:shadow-md transition-shadow duration-300"
-              >
-                <div className="relative w-full h-48">
-                  <Image
-                    src={`${API_BASE_URL}${post.featuredImage}`}
-                    alt={post.title}
-                    layout="fill"
-                    objectFit="cover"
-                    // onError={(e) => (e.target.src = project.fallbackUrl)}
-                  />
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-primary-text">
-                    {post.title}
-                  </h3>
-                  <p className="mt-2 text-secondary-text">{post.description}</p>
-                  <div className="mt-4">
-                    <Link
-                      href={`/portfolios/${post.slug}`}
-                      className="text-sm font-medium text-accent-text hover:text-primary-btn-hover transition-colors duration-200"
-                    >
-                      View Project →
-                    </Link>
+              <Link href={`/portfolios/${post.slug}`} key={index}>
+                <motion.div
+                  initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: false }}
+                  transition={{
+                    duration: shouldReduceMotion ? 0 : 0.5,
+                    delay: index * 0.1,
+                  }}
+                  className="bg-primary-bg shadow-sm rounded-lg overflow-hidden hover:shadow-md transition-shadow duration-300"
+                >
+                  <div className="relative w-full h-48">
+                    <Image
+                      src={`${API_BASE_URL}${post.featuredImage}`}
+                      alt={post.title}
+                      layout="fill"
+                      objectFit="cover"
+                      // onError={(e) => (e.target.src = project.fallbackUrl)}
+                    />
                   </div>
-                </div>
-              </motion.div>
+                  <div className="p-6">
+                    <h3 className="text-xl font-bold text-primary-text">
+                      {post.title}
+                    </h3>
+                    <p className="mt-2 text-secondary-text">
+                      {post.description}
+                    </p>
+                    <div className="mt-4">
+                      <Link
+                        href={`/portfolios/${post.slug}`}
+                        className="text-sm font-medium text-accent-text hover:text-primary-btn-hover transition-colors duration-200"
+                      >
+                        View Project →
+                      </Link>
+                    </div>
+                  </div>
+                </motion.div>
+              </Link>
             ))}
           </div>
         </div>
