@@ -82,7 +82,7 @@ const PortfolioPostPage = async ({ params }) => {
           </div>
 
           {/* Title */}
-          <h1 className="text-4xl font-bold text-primary-text mb-4">
+          <h1 className="text-3xl font-bold text-primary-text mb-4">
             {portfolio.title}
           </h1>
 
@@ -111,7 +111,7 @@ const PortfolioPostPage = async ({ params }) => {
 
           {/* Featured Image */}
           {portfolio.featuredImage && (
-            <div className="mb-8">
+            <div className="mb-8 p-2">
               <img
                 src={`${API_BASE_URL}${portfolio.featuredImage}`}
                 alt={portfolio.title}
@@ -121,7 +121,7 @@ const PortfolioPostPage = async ({ params }) => {
           )}
 
           {/* Markdown Content */}
-          <div className="prose prose-lg text-gray-800 max-w-none">
+          <div className="prose text-sm md:text-md prose-lg text-gray-800 max-w-none">
             <ReactMarkdown
               remarkPlugins={[remarkGfm]}
               rehypePlugins={[rehypeHighlight]}
@@ -154,7 +154,7 @@ const PortfolioPostPage = async ({ params }) => {
                 },
                 img({ node, ...props }) {
                   return (
-                    <div className="my-8">
+                    <div className="my-8 p-2">
                       <Image
                         {...props}
                         width={1200}
