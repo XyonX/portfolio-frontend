@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import { useAppContext } from "./AppProvider";
+import FeaturedPosts from "../components/FeaturedPosts";
 
 export default function Home() {
   const API_BASE_URL =
@@ -185,7 +186,7 @@ export default function Home() {
         <div className="absolute bottom-0 left-0 w-64 h-64 bg-decor-blue rounded-full -z-10 opacity-50 transform -translate-x-1/4 translate-y-1/4 blur-2xl" />
       </section>
 
-      {featuredPortfolios && featuredPortfolios.length > 0 && (
+      {/* {featuredPortfolios && featuredPortfolios.length > 0 && (
         <section className="py-16">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <motion.h2
@@ -241,7 +242,8 @@ export default function Home() {
             </div>
           </div>
         </section>
-      )}
+      )} */}
+      <FeaturedPosts />
 
       {/* Skills Section */}
       <section className="relative py-16 bg-primary-bg overflow-hidden">

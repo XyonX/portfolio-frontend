@@ -171,3 +171,411 @@ export default function Home() {
     </div>
   );
 }
+
+//featrured post 
+
+"use client";
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { motion } from "framer-motion";
+import { ArrowRight, Clock, Tag, AlertTriangle } from "lucide-react";
+import { useAppContext } from "../app/AppProvider";
+
+// Fallback data in case the API is not available
+const fallbackPosts = [
+  {
+    id: 1,
+    title: "Building Responsive Web Applications",
+    slug: "building-responsive-web-applications",
+    description:
+      "Learn how to create web applications that work seamlessly across all devices.",
+    featuredImage: "/placeholder.svg?height=400&width=600",
+    publicationDate: "2023-01-15",
+    readTime: 5,
+    categories: ["Web Development", "Responsive Design"],
+    type: "blog",
+  },
+  {
+    id: 2,
+    title: "Getting Started with Unreal Engine",
+    slug: "getting-started-with-unreal-engine",
+    description:
+      "A beginner's guide to creating your first game with Unreal Engine.",
+    featuredImage: "/placeholder.svg?height=400&width=600",
+    publicationDate: "2023-02-20",
+    readTime: 8,
+    categories: ["Game Development", "Unreal Engine"],
+    type: "blog",
+  },
+  {
+    id: 3,
+    title: "E-commerce Platform",
+    slug: "e-commerce-platform",
+    description: "A full-stack online store built with Next.js and Stripe.",
+    featuredImage: "/placeholder.svg?height=400&width=600",
+    publicationDate: "2023-03-10",
+    readTime: 3,
+    categories: ["Web Development", "E-commerce"],
+    type: "portfolio",
+  },
+  {
+    id: 4,
+    title: "3D Adventure Game",
+    slug: "3d-adventure-game",
+    description:
+      "An immersive 3D adventure game developed using Unreal Engine.",
+    featuredImage: "/placeholder.svg?height=400&width=600",
+    publicationDate: "2023-03-05",
+    readTime: 6,
+    categories: ["Game Development", "Unreal Engine"],
+    type: "portfolio",
+  },
+  {
+    id: 5,
+    title: "Modern UI Design Principles",
+    slug: "modern-ui-design-principles",
+    description:
+      "Exploring the latest trends and best practices in UI/UX design.",
+    featuredImage: "/placeholder.svg?height=400&width=600",
+    publicationDate: "2023-04-12",
+    readTime: 4,
+    categories: ["Design", "UI/UX"],
+    type: "blog",
+  },
+  {
+    id: 6,
+    title: "Portfolio Website",
+    slug: "portfolio-website",
+    description:
+      "A responsive portfolio website showcasing my work and skills.",
+    featuredImage: "/placeholder.svg?height=400&width=600",
+    publicationDate: "2023-05-18",
+    readTime: 2,
+    categories: ["Web Development", "Portfolio"],
+    type: "portfolio",
+  },
+];
+
+const FeaturedPosts = () => {
+  const API_BASE_URL =
+    process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3001"; // Fallback for local dev
+
+  const { portfolios, featuredPortfolios } = useAppContext();
+  const [featuredPosts, setFeaturedPosts] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+  //const [usingFallbackData, setUsingFallbackData] = useState(false);
+  useEffect(() => {
+    let isMounted = true;
+    const fetchFeaturedPosts = async () => {
+      if (!isMounted) return;
+
+      setIsLoading(true);
+      setError(null);
+      setUsingFallbackData(false);
+
+      try {
+        // Try to get data from localStorage first for faster loading
+        const cachedData = localStorage.getItem("featuredPosts");
+        let combinedPosts = [];
+
+        if (cachedData) {
+          try {
+            combinedPosts = JSON.parse(cachedData);
+            if (isMounted) {
+              setFeaturedPosts(combinedPosts);
+              setIsLoading(false);
+            }
+          } catch (err) {
+            console.error("Error parsing cached data:", err);
+            // Continue to fetch from API if cache parsing fails
+          }
+        }
+
+        // Fetch fresh data from API
+        // Use Promise.allSettled to handle partial failures
+        const results = await Promise.allSettled([
+          fetchWithTimeout(`${API_BASE_URL}/api/blogs`),
+          fetchWithTimeout(`${API_BASE_URL}/api/portfolios`),
+        ]);
+
+        // Process results
+        let blogs = [];
+        let portfolios = [];
+        let fetchError = false;
+
+        // Handle blogs result
+        if (results[0].status === "fulfilled") {
+          const blogsData = await results[0].value.json();
+          blogs = blogsData.data.slice(0, 3).map((blog) => ({
+            ...blog,
+            type: "blog",
+          }));
+        } else {
+          console.error("Failed to fetch blogs:", results[0].reason);
+          fetchError = true;
+        }
+
+        // Handle portfolios result
+        if (results[1].status === "fulfilled") {
+          const portfoliosData = await results[1].value.json();
+          portfolios = portfoliosData.data.slice(0, 3).map((portfolio) => ({
+            ...portfolio,
+            type: "portfolio",
+          }));
+        } else {
+          console.error("Failed to fetch portfolios:", results[1].reason);
+          fetchError = true;
+        }
+
+        if (isMounted) {
+          if (blogs.length === 0 && portfolios.length === 0) {
+            // If both fetches failed or returned empty data, use fallback
+            setFeaturedPosts(fallbackPosts);
+            setUsingFallbackData(true);
+            if (fetchError) {
+              setError("Could not connect to the API. Using fallback data.");
+            }
+          } else {
+            // Combine and sort by date
+            combinedPosts = [...blogs, ...portfolios]
+              .sort(
+                (a, b) =>
+                  new Date(b.publicationDate).getTime() -
+                  new Date(a.publicationDate).getTime()
+              )
+              .slice(0, 6);
+
+            setFeaturedPosts(combinedPosts);
+
+            // Cache the data for future use
+            try {
+              localStorage.setItem(
+                "featuredPosts",
+                JSON.stringify(combinedPosts)
+              );
+            } catch (err) {
+              console.error("Error caching data:", err);
+            }
+          }
+
+          setIsLoading(false);
+        }
+      } catch (error) {
+        console.error("Error fetching featured posts:", error);
+
+        if (isMounted) {
+          setError(error.message || "Failed to fetch featured posts");
+          setFeaturedPosts(fallbackPosts);
+          setUsingFallbackData(true);
+          setIsLoading(false);
+        }
+      }
+    };
+
+    fetchFeaturedPosts();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [API_BASE_URL]);
+
+  // Helper function to fetch with timeout
+  async function fetchWithTimeout(url, options, timeout = 5000) {
+    const controller = new AbortController();
+    const id = setTimeout(() => controller.abort(), timeout);
+
+    try {
+      const response = await fetch(url, {
+        ...options,
+        signal: controller.signal,
+        cache: "no-store",
+      });
+
+      clearTimeout(id);
+
+      if (!response.ok) {
+        throw new Error(`API responded with status: ${response.status}`);
+      }
+
+      return response;
+    } catch (error) {
+      clearTimeout(id);
+      if (error.name === "AbortError") {
+        throw new Error("Request timed out");
+      }
+      throw error;
+    }
+  }
+
+  const filteredPosts = featuredPosts;
+
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const item = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0 },
+  };
+
+  //   if (isLoading) {
+  //     return (
+  //       <section className="py-16 bg-gradient-to-br from-white via-gray-50 to-white">
+  //         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+  //           <div className="text-center mb-12">
+  //             <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl mb-4">
+  //               Featured Projects
+  //             </h2>
+  //             <div className="flex justify-center mt-8">
+  //               <div className="w-16 h-16 border-4 border-t-accent-text border-gray-200 rounded-full animate-spin"></div>
+  //             </div>
+  //           </div>
+  //         </div>
+  //       </section>
+  //     );
+  //   }
+
+  return (
+    <section className="py-16 bg-gradient-to-br from-white via-gray-50 to-white">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl mb-4">
+            Featured Projects
+          </h2>
+          {/* <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            Explore my latest work showcasing my skills and expertise
+          </p> */}
+        </div>
+
+        {/* {usingFallbackData && (
+          <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-8">
+            <div className="flex">
+              <div className="flex-shrink-0">
+                <AlertTriangle className="h-5 w-5 text-yellow-400" />
+              </div>
+              <div className="ml-3">
+                <p className="text-sm text-yellow-700">
+                  {error ||
+                    "Using sample content as we couldn't connect to the API."}
+                </p>
+              </div>
+            </div>
+          </div>
+        )} */}
+
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          variants={container}
+          initial="hidden"
+          animate="show"
+          key="featured-posts"
+        >
+          {filteredPosts.length > 0 ? (
+            featuredPortfolios.map((post, index) => (
+              <motion.div
+                key={`${post.type}-${post.id}-${index}`}
+                variants={item}
+              >
+                <Link
+                  href={`/${post.type === "blog" ? "blogs" : "portfolios"}/${
+                    post.slug
+                  }`}
+                  className="group block h-full"
+                >
+                  <div className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 h-full flex flex-col transform group-hover:-translate-y-1">
+                    <div className="relative h-48 overflow-hidden">
+                      <Image
+                        src={
+                          post.featuredImage &&
+                          !post.featuredImage.startsWith("/placeholder")
+                            ? `${API_BASE_URL}${post.featuredImage}`
+                            : "/placeholder.svg?height=400&width=600"
+                        }
+                        alt={post.title}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        onError={(e) => {
+                          const target = e.target;
+                          target.src = "/placeholder.svg?height=400&width=600";
+                        }}
+                      />
+                      <div className="absolute top-3 right-3">
+                        <span
+                          className={`text-xs font-medium px-2 py-1 rounded-full ${
+                            post.type === "blog"
+                              ? "bg-blue-100 text-blue-800"
+                              : "bg-purple-100 text-purple-800"
+                          }`}
+                        >
+                          {post.type === "blog" ? "Blog" : "Project"}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="p-5 flex-grow flex flex-col">
+                      <div className="flex items-center text-xs text-gray-500 mb-3 space-x-4">
+                        <div className="flex items-center">
+                          <Clock size={14} className="mr-1" />
+                          <span>{post.readTime} min read</span>
+                        </div>
+                        {post.categories && post.categories.length > 0 && (
+                          <div className="flex items-center">
+                            <Tag size={14} className="mr-1" />
+                            <span>{post.categories[0]}</span>
+                          </div>
+                        )}
+                      </div>
+
+                      <h3 className="text-lg font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-accent-text transition-colors">
+                        {post.title}
+                      </h3>
+
+                      <p className="text-gray-600 text-sm mb-4 line-clamp-3 flex-grow">
+                        {post.description}
+                      </p>
+
+                      <div className="flex items-center text-accent-text font-medium text-sm mt-auto">
+                        <span>Read more</span>
+                        <ArrowRight
+                          size={16}
+                          className="ml-1 transition-transform group-hover:translate-x-1"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              </motion.div>
+            ))
+          ) : (
+            <div className="col-span-3 text-center py-12">
+              <p className="text-gray-500">No posts found.</p>
+            </div>
+          )}
+        </motion.div>
+
+        <div className="text-center mt-12">
+          <Link
+            href="/portfolios"
+            className="inline-flex items-center px-6 py-3 bg-accent-text text-white rounded-lg hover:bg-accent-text/90 transition-colors"
+          >
+            View All Projects
+            <ArrowRight size={16} className="ml-2" />
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+};
+export default FeaturedPosts;
+
+
+
