@@ -11,6 +11,7 @@ const nextConfig = {
       "localhost",
       "raw.githubusercontent.com",
       "portfolio-backend-b3a7.onrender.com",
+      "joycodes-backend.vercel.app",
     ], // Allow Unsplash images
   },
 };
