@@ -25,10 +25,16 @@ const Post = ({ post }) => {
 
       {/* Content */}
       <div className="p-3 space-y-2">
-        <h2 className="text-base font-semibold text-gray-900 line-clamp-2">
+        {/* Title with fixed height for 2 lines */}
+        <h2 className="text-base font-semibold text-gray-900 line-clamp-2 min-h-[3.5rem]">
           {post.title}
         </h2>
-        <p className="text-xs text-gray-600 line-clamp-3">{post.description}</p>
+
+        {/* Description with fixed height for 3 lines */}
+        <p className="text-xs text-gray-600 line-clamp-3 min-h-[4.5rem]">
+          {post.description}
+        </p>
+
         <div className="flex items-center justify-between text-[11px] text-gray-500">
           <span>{new Date(post.publicationDate).toDateString()}</span>
           <span>{post.readTime} min read</span>

@@ -25,7 +25,7 @@ const PostContent = ({ post }) => {
         )}
       </Head>
 
-      <section className="py-16">
+      <section className=" py-6 md:py-16">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           {/* Breadcrumb */}
           <div className="mb-6 text-sm">
