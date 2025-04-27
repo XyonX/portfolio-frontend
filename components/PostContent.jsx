@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -6,12 +7,29 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
 import "highlight.js/styles/github-dark.css";
+import { useState } from "react";
 
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { tomorrow } from "react-syntax-highlighter/dist/esm/styles/prism";
 const PostContent = ({ post }) => {
+  // State for managing modal visibility and selected image
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
+
   const API_BASE_URL =
     process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3001";
+
+  // Function to open modal with clicked image
+  const openModal = (imageSrc) => {
+    setSelectedImage(imageSrc);
+    setIsModalOpen(true);
+  };
+
+  // Function to close modal
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedImage(null);
+  };
 
   return (
     <div className="bg-primary-bg min-h-screen">
@@ -81,8 +99,9 @@ const PostContent = ({ post }) => {
                         {...props}
                         width={1200}
                         height={600}
-                        className="rounded-lg shadow-lg"
+                        className="rounded-lg shadow-lg cursor-pointer"
                         alt={props.alt || "post post image"}
+                        onClick={() => openModal(props.src)}
                       />
                     </div>
                   );
@@ -104,6 +123,27 @@ const PostContent = ({ post }) => {
           </div>
         </div>
       </section>
+      {/* Modal for enlarged image */}
+      {isModalOpen && (
+        <div
+          className="cursor-pointer fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 transition-opacity duration-300"
+          onClick={closeModal}
+        >
+          <div
+            className="relative w-full max-w-[90vw] p-4 overflow-hidden rounded-lg"
+            onClick={(e) => e.stopPropagation()} // Prevent closing when clicking the image
+          >
+            <Image
+              src={selectedImage}
+              width={1920}
+              height={1080}
+              className="rounded-lg shadow-2xl "
+              alt="Enlarged image"
+              style={{ objectFit: "contain", maxHeight: "90vh", width: "100%" }}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 };
