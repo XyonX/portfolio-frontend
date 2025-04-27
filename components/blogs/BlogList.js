@@ -17,6 +17,9 @@ console.log(getBlogs());
 const BlogList = async () => {
   const json = await getBlogs();
   const blogs = json.data;
+  console.log("Receiverd blog: ", blogs);
+
+  console.log("Blog received");
   return (
     <div className="px-4 py-8 sm:px-6 lg:px-8 max-w-7xl mx-auto mt-5 bg-primary-bg">
       <BlogGrid blogs={blogs} />

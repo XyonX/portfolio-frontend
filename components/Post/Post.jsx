@@ -31,7 +31,7 @@ const Post = ({ post }) => {
         </h2>
 
         {/* Description with fixed height for 3 lines */}
-        <p className="text-xs text-gray-600 line-clamp-3 min-h-[4.5rem]">
+        <p className="text-xs text-gray-600 line-clamp-3 min-h-[4rem]">
           {post.description}
         </p>
 
