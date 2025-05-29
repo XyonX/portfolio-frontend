@@ -218,9 +218,10 @@ export default async function PortfolioPage() {
             Other Projects
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {regularProjects.map((project) => (
-              <div
-                key={project._id}
+            {regularProjects.map((project, index) => (
+              <Link
+                key={`project-${project._id}-${index}`}
+                href={`/portfolio/${project.slug || project._id}`}
                 className="group border border-neutral-200 dark:border-neutral-800 rounded-xl overflow-hidden transition-all hover:shadow-md"
               >
                 <div className="relative h-48 w-full bg-neutral-100 dark:bg-neutral-800 overflow-hidden">
@@ -283,7 +284,7 @@ export default async function PortfolioPage() {
                     )}
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </section>
