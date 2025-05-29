@@ -67,14 +67,9 @@ export function SideNav() {
                 className="flex items-center space-x-2"
                 onClick={() => setIsOpen(false)}
               >
-                <div className="w-10 h-10 rounded-md bg-neutral-900 dark:bg-neutral-100 flex items-center justify-center">
-                  <LucideCode
-                    className="text-neutral-100 dark:text-neutral-900"
-                    size={20}
-                  />
-                </div>
+                <div className="w-10 h-10 rounded-md bg-neutral-900 dark:bg-neutral-100 flex items-center justify-center"></div>
                 <span className="font-mono text-lg font-semibold tracking-tight">
-                  john.doe
+                  Joydip Chakraborty
                 </span>
               </Link>
             </div>
