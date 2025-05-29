@@ -8,7 +8,8 @@ import {
   LucideExternalLink,
   LucideGithub,
 } from "lucide-react";
-import { MarkdownRenderer } from "../../../../components/new/mdx";
+// import { MarkdownRenderer } from "../../../../components/new/mdx";
+import { MarkdownRenderer } from "../../../../components/new/markdown-renderer";
 
 // Define baseUrl directly here instead of importing
 const baseUrl = "https://portfolio-blog-starter.vercel.app";

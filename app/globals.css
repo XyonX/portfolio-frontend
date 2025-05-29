@@ -56,11 +56,11 @@ h6 {
 }
 
 .prose pre {
-  @apply bg-neutral-100 dark:bg-neutral-900 rounded-lg overflow-x-auto border border-neutral-200 dark:border-neutral-800 py-3 px-4;
+  @apply rounded-lg overflow-x-auto   py-3 px-4;
 }
 
 .prose code {
-  @apply px-1 py-0.5 rounded-md bg-neutral-100 dark:bg-neutral-800;
+  @apply px-1 py-0.5 rounded-md;
 }
 
 .prose pre code {

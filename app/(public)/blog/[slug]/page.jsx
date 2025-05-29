@@ -2,7 +2,8 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { LucideArrowLeft, LucideClock, LucideCalendar } from "lucide-react";
-import { MarkdownRenderer } from "../../../../components/new/mdx";
+// import { MarkdownRenderer } from "../../../../components/new/mdx";
+import { MarkdownRenderer } from "../../../../components/new/markdown-renderer";
 // Define baseUrl directly here instead of importing
 const baseUrl = "https://portfolio-blog-starter.vercel.app";
 const API_BASE_URL = "https://joycodes-backend.vercel.app";
@@ -135,8 +136,6 @@ export default async function BlogPost({ params }) {
         <LucideArrowLeft size={14} className="mr-1" />
         Back to all posts
       </Link>
-
-
 
       <div className="prose prose-neutral dark:prose-invert max-w-none prose-headings:font-mono prose-headings:font-semibold prose-a:text-emerald-600 dark:prose-a:text-emerald-400 prose-img:rounded-xl">
         <MarkdownRenderer content={blog.content || ""} />
