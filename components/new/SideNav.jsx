@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
-import { ThemeToggle } from "./theme-toggle";
+import { ThemeToggle } from "../theme-toggle";
 import {
   LucideCode,
   LucideHome,
@@ -12,7 +12,6 @@ import {
   LucideBriefcase,
   LucideMenu,
   LucideX,
-  LucideImage,
 } from "lucide-react";
 import { useState } from "react";
 
@@ -37,14 +36,12 @@ const navItems = [
     name: "Writing",
     icon: LucideNewspaper,
   },
-  {
-    path: "/gallery",
-    name: "Gallery",
-    icon: LucideImage,
-  },
 ];
 
-const SideNav = () => {
+export function SideNav() {
+  const pathname = usePathname();
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <>
       {/* Mobile menu button */}
@@ -55,6 +52,7 @@ const SideNav = () => {
       >
         {isOpen ? <LucideX size={20} /> : <LucideMenu size={20} />}
       </button>
+
       {/* Sidebar for desktop */}
       <aside
         className={`fixed inset-y-0 left-0 z-40 w-64 bg-white dark:bg-neutral-900 border-r border-neutral-200 dark:border-neutral-800 transform transition-transform duration-300 ease-in-out md:translate-x-0 ${
@@ -118,7 +116,7 @@ const SideNav = () => {
               <ThemeToggle />
               <div className="flex space-x-3">
                 <a
-                  href="https://github.com"
+                  href="https://github.com/xyonx"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-2 rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
@@ -140,7 +138,7 @@ const SideNav = () => {
                   </svg>
                 </a>
                 <a
-                  href="https://twitter.com"
+                  href="https://x.com/__CraftedPixels"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-2 rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
@@ -163,7 +161,7 @@ const SideNav = () => {
               </div>
             </div>
             <div className="text-xs text-neutral-500 dark:text-neutral-400">
-              © {new Date().getFullYear()} John Doe
+              © {new Date().getFullYear()} joydip chakraborty
               <br />
               All rights reserved
             </div>
@@ -172,6 +170,4 @@ const SideNav = () => {
       </aside>
     </>
   );
-};
-
-export default SideNav;
+}

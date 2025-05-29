@@ -1,80 +1,100 @@
 /** @type {import('tailwindcss').Config} */
+import { fontFamily } from "tailwindcss/defaultTheme";
 export default {
+  darkMode: ["class"],
   content: [
+    "app/**/*.{ts,tsx}",
+    "components/**/*.{ts,tsx}",
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ["var(--font-space-grotesk)", ...fontFamily.sans],
+        mono: ["var(--font-geist-mono)"],
+      },
       colors: {
-        // Primary Backgrounds
-        "primary-bg": "var(--primary-bg, #FFFFFF)", // white
-        "secondary-bg": "var(--secondary-bg, #F9FAFB)", // gray-50
-        "dark-bg": "var(--dark-bg, #000000)", // black
-
-        // Gradient Colors
-        "gradient-start": "var(--gradient-start, #EFF6FF)", // blue-50
-        "gradient-mid": "var(--gradient-mid, #EEF2FF)", // indigo-50
-        "gradient-end": "var(--gradient-end, #FFFFFF)", // white
-        "decor-light": "var(--decor-light, #EBE8FF)", // indigo-100
-        "decor-blue": "var(--decor-blue, #DBEAFE)", // blue-100
-
-        // Text Colors
-        "primary-text": "var(--primary-text, #111827)", // gray-900
-        "secondary-text": "var(--secondary-text, #4B5563)", // gray-600
-        "accent-text": "var(--accent-text, #4F46E5)", // indigo-600
-        "light-text": "var(--light-text, #FFFFFF)", // white
-        "dark-text": "var(--dark-text, #000000)", // black
-
-        // Button Colors
-        "primary-btn": "var(--primary-btn, #4F46E5)", // indigo-600
-        "primary-btn-hover": "var(--primary-btn-hover, #4338CA)", // indigo-700
-        "secondary-btn-hover": "var(--secondary-btn-hover, #EEF2FF)", // indigo-50
-        "dark-btn": "var(--dark-btn, #000000)", // black
-        "dark-btn-hover": "var(--dark-btn-hover, #1F2937)", // gray-800
-
-        // Borders
-        "accent-border": "var(--accent-border, #4F46E5)", // indigo-600
-        "light-border": "var(--light-border, #C7D2FE)", // indigo-200
-
-        // Status Indicator
-        "status-light": "var(--status-light, #34D399)", // green-400
-        "status-dark": "var(--status-dark, #10B981)", // green-500
-
-        // Tech Icons
-        "tech-accent": "var(--tech-accent, #4F46E5)", // indigo-600
-        "tech-dark": "var(--tech-dark, #000000)", // black
-        "tech-blue": "var(--tech-blue, #3B82F6)", // blue-500
-
-        //skills color
-        "skills-bg": "var(--skills-bg, #64748B)", // slate-500
-        "skills-bg-hover": "var(--skills-bg-hover, #475569)", // slate-600
-      },
-      animation: {
-        "particle-flow": "particle 15s linear infinite",
-        rotate: "rotate 20s linear infinite",
-        float: "float 10s ease-in-out infinite",
-      },
-      keyframes: {
-        particle: {
-          "0%": { transform: "translateY(0) translateX(0)" },
-          "100%": { transform: "translateY(-100vh) translateX(100vw)" },
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
         },
-        rotate: {
-          "0%": { transform: "rotate(0deg)" },
-          "100%": { transform: "rotate(360deg)" },
+        secondary: {
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
         },
-        float: {
-          "0%, 100%": { transform: "translateY(0)" },
-          "50%": { transform: "translateY(-20px)" },
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
+        },
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
+        },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
+        },
+        emerald: {
+          50: "#ecfdf5",
+          100: "#d1fae5",
+          200: "#a7f3d0",
+          300: "#6ee7b7",
+          400: "#34d399",
+          500: "#10b981",
+          600: "#059669",
+          700: "#047857",
+          800: "#065f46",
+          900: "#064e3b",
+          950: "#022c22",
+        },
+        purple: {
+          50: "#faf5ff",
+          100: "#f3e8ff",
+          200: "#e9d5ff",
+          300: "#d8b4fe",
+          400: "#c084fc",
+          500: "#a855f7",
+          600: "#9333ea",
+          700: "#7e22ce",
+          800: "#6b21a8",
+          900: "#581c87",
+          950: "#3b0764",
+        },
+      },
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
+      },
+      typography: {
+        DEFAULT: {
+          css: {
+            "code::before": {
+              content: '""',
+            },
+            "code::after": {
+              content: '""',
+            },
+          },
         },
       },
     },
   },
-  plugins: [
-    require("@tailwindcss/typography"),
-    require("@tailwindcss/line-clamp"),
-    // other plugins
-  ],
+  plugins: [require("@tailwindcss/typography"), require("tailwindcss-animate")],
 };
