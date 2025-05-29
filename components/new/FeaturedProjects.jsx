@@ -40,7 +40,7 @@ export async function FeaturedProjects() {
           {featuredProjects.map((post, index) => (
             <Link
               key={`project-${post._id}-${index}`}
-              href={`/portfolios/${post.slug || post._id}`}
+              href={`/portfolio/${post.slug || post._id}`}
               className="group"
             >
               <article className="h-full flex flex-col border border-neutral-200 dark:border-neutral-800 rounded-xl overflow-hidden transition-all hover:shadow-md">
