@@ -2,7 +2,7 @@ import React from "react";
 
 const LoadingScreen = () => {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-white">
+    <div className="flex flex-col items-center justify-center min-h-screen">
       {/* Loading Spinner */}
       <div className="relative w-16 h-16">
         <div className="absolute inset-0 border-4 border-t-transparent border-gray-300 rounded-full animate-spin"></div>
