@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { LucideExternalLink, LucideGithub } from "lucide-react";
+import Link from "next/link";
 
 // Sample projects data
 const projects = [
@@ -138,8 +139,9 @@ export default async function PortfolioPage() {
           </h2>
           <div className="space-y-16">
             {featuredProjects.map((project, index) => (
-              <div
-                key={project._id}
+              <Link
+                key={`project-${project._id}-${index}`}
+                href={`/portfolio/${project.slug || project._id}`}
                 className={`grid grid-cols-1 md:grid-cols-2 gap-8 items-center ${
                   index % 2 === 1 ? "md:flex-row-reverse" : ""
                 }`}
@@ -203,7 +205,7 @@ export default async function PortfolioPage() {
                     )}
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </section>
