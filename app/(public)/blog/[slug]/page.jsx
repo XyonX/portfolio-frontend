@@ -136,48 +136,7 @@ export default async function BlogPost({ params }) {
         Back to all posts
       </Link>
 
-      <div className="mb-12">
-        <div className="relative w-full h-[40vh] mb-8 rounded-2xl overflow-hidden">
-          <Image
-            src={postImage || "/placeholder.svg"}
-            alt={blog.title || "Blog Post"}
-            fill
-            className="object-cover"
-            priority
-          />
-        </div>
 
-        <h1 className="font-mono text-3xl md:text-4xl font-bold tracking-tight mb-4">
-          {blog.title || "Untitled Post"}
-        </h1>
-
-        <div className="flex flex-wrap items-center gap-4 mb-8 text-sm text-neutral-600 dark:text-neutral-400">
-          <div className="flex items-center">
-            <LucideCalendar size={16} className="mr-1" />
-            <time>{formatDate(blog.createdAt || blog.publicationDate)}</time>
-          </div>
-          <div className="flex items-center">
-            <LucideClock size={16} className="mr-1" />
-            <span>{readingTime} min read</span>
-          </div>
-          {blog.categories && blog.categories.length > 0 && (
-            <div className="flex gap-2">
-              {blog.categories.map((category, index) => (
-                <span
-                  key={index}
-                  className="px-2 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 rounded-full text-xs font-medium"
-                >
-                  {category}
-                </span>
-              ))}
-            </div>
-          )}
-        </div>
-
-        <p className="text-xl text-neutral-600 dark:text-neutral-400 mb-8 leading-relaxed">
-          {blog.description || "No description available"}
-        </p>
-      </div>
 
       <div className="prose prose-neutral dark:prose-invert max-w-none prose-headings:font-mono prose-headings:font-semibold prose-a:text-emerald-600 dark:prose-a:text-emerald-400 prose-img:rounded-xl">
         <MarkdownRenderer content={blog.content || ""} />
