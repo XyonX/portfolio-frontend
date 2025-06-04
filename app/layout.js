@@ -47,7 +47,7 @@ export default function RootLayout({ children }) {
           <div className="flex min-h-screen">
             <SideNav />
             <main className="flex-1 p-6 md:p-12 ml-0 md:ml-64 transition-all">
-              <div className="max-w-4xl mx-auto">
+              <div className="max-w-5xl mx-auto">
                 <Suspense>{children}</Suspense>
               </div>
             </main>
