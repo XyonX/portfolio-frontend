@@ -14,6 +14,8 @@ export function MarkdownRenderer({ content }) {
 
     // Simple markdown to HTML conversion
     const html = content
+      // Images
+      .replace(/!\[([^\]]*)\]\(([^\)]+)\)/gim, '<img src="$2" alt="$1" style="max-width:100%;height:auto;" class="rounded-xl my-6" />')
       // Headers
       .replace(/^### (.*$)/gim, "<h3>$1</h3>")
       .replace(/^## (.*$)/gim, "<h2>$1</h2>")
@@ -24,7 +26,7 @@ export function MarkdownRenderer({ content }) {
       .replace(/\*(.*)\*/gim, "<em>$1</em>")
       // Links
       .replace(
-        /\[([^\]]*)\]$$([^$$]*)\)/gim,
+        /\[([^\]]*)\]\$\$([^\$\$]*)\)/gim,
         '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>'
       )
       // Line breaks
@@ -52,6 +54,11 @@ export function MarkdownRenderer({ content }) {
       } else {
         // Regular content
         const processedContent = part
+          // Images
+          .replace(
+            /!\[([^\]]*)\]\(([^\)]+)\)/gim,
+            '<img src="$2" alt="$1" style="max-width:100%;height:auto;" class="rounded-xl my-6" />'
+          )
           // Headers
           .replace(
             /^### (.*$)/gim,
@@ -79,7 +86,7 @@ export function MarkdownRenderer({ content }) {
           )
           // Links
           .replace(
-            /\[([^\]]*)\]$$([^$$]*)\)/gim,
+            /\[([^\]]*)\]\$\$([^\$\$]*)\)/gim,
             '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-emerald-600 dark:text-emerald-400 hover:underline">$1</a>'
           )
           // Line breaks
