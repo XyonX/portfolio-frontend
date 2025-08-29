@@ -12,6 +12,7 @@ import {
   LucideBriefcase,
   LucideMenu,
   LucideX,
+  LucideLink,
 } from "lucide-react";
 import { useState } from "react";
 
@@ -35,6 +36,11 @@ const navItems = [
     path: "/blog",
     name: "Writing",
     icon: LucideNewspaper,
+  },
+  {
+    path: "/links",
+    name: "Links",
+    icon: LucideLink,
   },
 ];
 

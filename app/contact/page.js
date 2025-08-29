@@ -1,7 +1,38 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import Link from "next/link";
 
 const ContactPage = () => {
+  const [status, setStatus] = useState("idle"); // idle | sending | success | error
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus("sending");
+
+    const form = e.target;
+    const formData = new FormData(form);
+    formData.append("access_key", process.env.NEXT_PUBLIC_WEB3FORMS_KEY);
+    formData.append("subject", "New message from portfolio"); // optional
+
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData,
+      });
+
+      const json = await res.json();
+      if (json.success) {
+        setStatus("success");
+        form.reset();
+      } else {
+        console.error("Web3Forms error:", json);
+        setStatus("error");
+      }
+    } catch (err) {
+      console.error("Submit failed", err);
+      setStatus("error");
+    }
+  };
+
   return (
     <div className="bg-primary-bg">
       {/* Hero Section */}
@@ -34,7 +65,9 @@ const ContactPage = () => {
 
             {/* Right Form */}
             <div className="bg-white rounded-lg shadow-lg p-8">
-              <form className="space-y-6">
+              <form className="space-y-6" onSubmit={handleSubmit}>
+                <input type="hidden" name="access_key" value="" />{" "}
+                {/* optional; set from JS instead */}
                 <div>
                   <label
                     htmlFor="name"
@@ -88,9 +121,17 @@ const ContactPage = () => {
                     type="submit"
                     className="w-full px-8 py-3 bg-primary-btn text-light-text font-semibold rounded-lg hover:bg-primary-btn-hover transition-all duration-300 shadow-md hover:shadow-lg"
                   >
-                    Send Message
+                    {status === "sending" ? "Sending..." : "Send Message"}
                   </button>
                 </div>
+                {status === "success" && (
+                  <p className="text-green-600 mt-2">Thanks — message sent!</p>
+                )}
+                {status === "error" && (
+                  <p className="text-red-600 mt-2">
+                    Something went wrong. Try again later.
+                  </p>
+                )}
               </form>
             </div>
           </div>
