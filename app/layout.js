@@ -42,12 +42,15 @@ export default function RootLayout({ children }) {
       className={cx("scroll-smooth", GeistMono.variable, spaceGrotesk.variable)}
       suppressHydrationWarning
     >
-      <body className="antialiased bg-neutral-50 dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100 transition-colors duration-300">
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </head>
+      <body className="antialiased bg-neutral-50 dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100 transition-colors duration-300 overflow-x-hidden">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <div className="flex min-h-screen">
+          <div className="flex min-h-screen w-full overflow-x-hidden">
             <SideNav />
-            <main className="flex-1 p-6 md:p-12 ml-0 md:ml-64 transition-all">
-              <div className="max-w-5xl mx-auto">
+            <main className="flex-1 p-4 md:p-8 lg:p-12 ml-0 md:ml-64 transition-all w-full">
+              <div className="w-full max-w-5xl mx-auto overflow-x-hidden">
                 <Suspense>{children}</Suspense>
               </div>
             </main>
