@@ -12,30 +12,92 @@ export function MarkdownRenderer({ content }) {
       return;
     }
 
-    // Simple markdown to HTML conversion
-    const html = content
-      // Images
-      .replace(/!\[([^\]]*)\]\(([^\)]+)\)/gim, '<img src="$2" alt="$1" style="max-width:100%;height:auto;" class="rounded-xl my-6" />')
-      // Headers
-      .replace(/^### (.*$)/gim, "<h3>$1</h3>")
-      .replace(/^## (.*$)/gim, "<h2>$1</h2>")
-      .replace(/^# (.*$)/gim, "<h1>$1</h1>")
-      // Bold
-      .replace(/\*\*(.*)\*\*/gim, "<strong>$1</strong>")
-      // Italic
-      .replace(/\*(.*)\*/gim, "<em>$1</em>")
-      // Links
-      .replace(
-        /\[([^\]]*)\]\$\$([^\$\$]*)\)/gim,
-        '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>'
-      )
-      // Line breaks
-      .replace(/\n\n/gim, "</p><p>")
-      // Wrap in paragraphs
-      .replace(/^(.*)$/gim, "<p>$1</p>");
-
+    // Simple markdown to HTML conversion for fallback
+    const html = processMarkdown(content);
     setRenderedContent(html);
   }, [content]);
+
+  // Process regular markdown content (non-code blocks)
+  const processMarkdown = (text) => {
+    return (
+      text
+        // Images
+        .replace(
+          /!\[([^\]]*)\]\(([^\)]+)\)/gim,
+          '<img src="$2" alt="$1" style="max-width:100%;height:auto;" class="rounded-xl my-6" />'
+        )
+        // Headers
+        .replace(
+          /^### (.*$)/gim,
+          '<h3 class="text-xl font-medium tracking-tight mt-8 mb-4">$1</h3>'
+        )
+        .replace(
+          /^## (.*$)/gim,
+          '<h2 class="text-2xl font-semibold tracking-tight mt-10 mb-4">$1</h2>'
+        )
+        .replace(
+          /^# (.*$)/gim,
+          '<h1 class="text-3xl font-bold tracking-tight mt-8 mb-4">$1</h1>'
+        )
+        // Bold
+        .replace(
+          /\*\*(.*?)\*\*/gim,
+          '<strong class="font-semibold">$1</strong>'
+        )
+        // Italic
+        .replace(/\*(.*?)\*/gim, '<em class="italic">$1</em>')
+        // Inline code
+        .replace(
+          /`([^`]+)`/gim,
+          '<code class="px-1 py-0.5 rounded-md bg-neutral-100 dark:bg-neutral-800 font-mono text-sm">$1</code>'
+        )
+        // Standard Markdown links
+        .replace(
+          /\[([^\]]+)\]\(([^)]+)\)/gim,
+          '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-emerald-600 dark:text-emerald-400 hover:underline">$1</a>'
+        )
+        // Horizontal rule
+        .replace(
+          /^---$/gim,
+          '<hr class="my-8 border-neutral-200 dark:border-neutral-700" />'
+        )
+        // Unordered lists
+        .replace(
+          /^\s*[\*\-\+]\s+(.+)$/gim,
+          '<li class="ml-4 list-disc">$1</li>'
+        )
+        // Ordered lists
+        .replace(
+          /^\s*(\d+)\.\s+(.+)$/gim,
+          '<li class="ml-4 list-decimal">$2</li>'
+        )
+        // Blockquotes
+        .replace(
+          /^>\s+(.+)$/gim,
+          '<blockquote class="pl-4 border-l-4 border-neutral-300 dark:border-neutral-700 text-neutral-600 dark:text-neutral-400">$1</blockquote>'
+        )
+        // Convert consecutive list items into proper lists
+        .replace(/(<li[^>]*>.*<\/li>)(\s*)(<li[^>]*>)/gim, "$1$2$3")
+        // Wrap lists in ul/ol tags
+        .replace(
+          /(<li class="ml-4 list-disc">.*?<\/li>)/gs,
+          '<ul class="my-4">$1</ul>'
+        )
+        .replace(
+          /(<li class="ml-4 list-decimal">.*?<\/li>)/gs,
+          '<ol class="my-4">$1</ol>'
+        )
+        // Task lists
+        .replace(
+          /^\s*\[ \]\s+(.+)$/gim,
+          '<div class="flex items-start my-2"><input type="checkbox" class="mt-1 mr-2" disabled /><span>$1</span></div>'
+        )
+        .replace(
+          /^\s*\[x\]\s+(.+)$/gim,
+          '<div class="flex items-start my-2"><input type="checkbox" class="mt-1 mr-2" checked disabled /><span>$1</span></div>'
+        )
+    );
+  };
 
   // Extract and render code blocks separately
   const renderContentWithCodeBlocks = () => {
@@ -52,52 +114,30 @@ export function MarkdownRenderer({ content }) {
 
         return <CodeBlock key={index} language={language} code={code} />;
       } else {
-        // Regular content
-        const processedContent = part
-          // Images
-          .replace(
-            /!\[([^\]]*)\]\(([^\)]+)\)/gim,
-            '<img src="$2" alt="$1" style="max-width:100%;height:auto;" class="rounded-xl my-6" />'
-          )
-          // Headers
-          .replace(
-            /^### (.*$)/gim,
-            '<h3 class="text-xl font-medium tracking-tight mt-8 mb-4">$1</h3>'
-          )
-          .replace(
-            /^## (.*$)/gim,
-            '<h2 class="text-2xl font-semibold tracking-tight mt-10 mb-4">$1</h2>'
-          )
-          .replace(
-            /^# (.*$)/gim,
-            '<h1 class="text-3xl font-bold tracking-tight mt-8 mb-4">$1</h1>'
-          )
-          // Bold
-          .replace(
-            /\*\*(.*?)\*\*/gim,
-            '<strong class="font-semibold">$1</strong>'
-          )
-          // Italic
-          .replace(/\*(.*?)\*/gim, '<em class="italic">$1</em>')
-          // Inline code
-          .replace(
-            /`([^`]+)`/gim,
-            '<code class="px-1 py-0.5 rounded-md bg-neutral-100 dark:bg-neutral-800 font-mono text-sm">$1</code>'
-          )
-          // Links
-          .replace(
-            /\[([^\]]*)\]\$\$([^\$\$]*)\)/gim,
-            '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-emerald-600 dark:text-emerald-400 hover:underline">$1</a>'
-          )
-          // Line breaks
-          .split("\n\n")
-          .map((paragraph) => paragraph.trim())
-          .filter((paragraph) => paragraph.length > 0)
-          .map(
-            (paragraph) =>
-              `<p class="my-4 leading-relaxed text-neutral-800 dark:text-neutral-200">${paragraph}</p>`
-          )
-          .join("");
+        // Pre-process list items to group them properly
+        let processedPart = part;
+
+        // Process regular content
+        const sections = processedPart.split("\n\n");
+        const processedSections = sections.map((section) => {
+          // Check if section is a list
+          if (
+            section.match(/^\s*[\*\-\+]\s+.+/gm) ||
+            section.match(/^\s*\d+\.\s+.+/gm)
+          ) {
+            // Process as list but keep original line breaks
+            return processMarkdown(section);
+          } else {
+            // Process individual paragraphs
+            return section.trim().length > 0
+              ? `<p class="my-4 leading-relaxed text-neutral-800 dark:text-neutral-200">${processMarkdown(
+                  section
+                )}</p>`
+              : "";
+          }
+        });
+
+        const processedContent = processedSections.join("");
 
         return (
           <div

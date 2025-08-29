@@ -108,7 +108,8 @@ export default async function PortfolioProject({ params }) {
     Math.max(1, Math.ceil((portfolio.content?.split(/\s+/).length || 0) / 200));
 
   return (
-    <article className="max-w-4xl mx-auto">
+    // <article className="max-w-4xl mx-auto">
+    <article className="max-w-4xl mx-auto w-full px-2 sm:px-0 overflow-x-hidden">
       <script
         type="application/ld+json"
         suppressHydrationWarning
