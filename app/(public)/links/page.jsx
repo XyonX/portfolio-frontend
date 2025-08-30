@@ -8,6 +8,7 @@ import {
   LucideMail,
   LucidePhone,
   LucideGlobe,
+  LucideCode,
   LucideExternalLink,
 } from "lucide-react";
 
@@ -36,6 +37,18 @@ const links = [
     description: "Follow me for updates and discussions",
     url: "https://x.com/__CraftedPixels",
     icon: LucideTwitter,
+  },
+  {
+    title: "LeetCode",
+    description: "Check out my coding solutions and progress",
+    url: "https://leetcode.com/u/XyonX/",
+    icon: LucideCode,
+  },
+  {
+    title: "HackerRank",
+    description: "View my programming challenges and skills",
+    url: "https://www.hackerrank.com/profile/xyonx",
+    icon: LucideCode,
   },
   {
     title: "Email",
